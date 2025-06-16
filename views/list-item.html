@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/popup.js" defer></script>
+    <!-- Tailwind & Iconify -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <!-- Flowbite JS -->
+    <script src="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.js" defer></script>
+    <title>Liste des équipements</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list" class="text-cyan-600"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-6 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">En Service</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">En Panne</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Obsolète</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+            </div>
+
+
+            <div class="my-5 space-x-3 mt-5">
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="AddModal()">Ajouter</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="FilterModal()">Filtrer</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer">Exporter</button>
+            </div>
+
+           <div class="bg-white border border-gray-300 px-4 py-6">
+                {{ if .item}}
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-white font-thin uppercase bg-cyan-900">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Libelle
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Description
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Quantité
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Type
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Valeur
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Statut
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date d'acquisition
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Dernière réparation
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range .item}}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ .Title }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ .Description }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Quantity }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Type }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Value }} XOF
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Status }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Start | formatDate }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Repair | formatDate }}
+                                </td>
+                                <td class="px-6 py-4 space-x-1 flex">
+                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-green-900" data-modal-target="update-modal-{{.ID}}" data-modal-toggle="update-modal-{{.ID}}" type="button">
+                                        <iconify-icon icon="fluent:pen-32-filled" width="20" height="20"></iconify-icon>
+                                    </button>
+                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-red-900" data-modal-target="delete-modal-{{.ID}}" data-modal-toggle="delete-modal-{{.ID}}" type="button">
+                                        <iconify-icon icon="material-symbols:delete-outline-rounded" width="20" height="20"></iconify-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+                {{else}}
+                <p class="text-2xl text-gray-800 text-center">Aucun équipement éxistant, veuillez en ajouté</p>
+                {{ end }}
+           </div>
+        </div>
+    </main>
+
+    <!-- Modal d'ajout des équipements -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="add">
+        <form action="/item-list" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Ajouter un equipement</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Libelle</label>
+                    <input type="text" name="title" placeholder="Libelle de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+
+                <div>
+                    <label for="">Quantité</label>
+                    <input type="number" name="quantity" min="0" placeholder="Quantité disponible de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+               
+                <div>
+                    <label for="">Description</label>
+                    <textarea name="description" placeholder="Description de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full" required></textarea>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option selected disabled>Veuillez choisir le type d'equipement</option>
+                            <option value="Equipements sportifs">Equipements sportifs</option>
+                            <option value="Equipements d'entretien et d'hygiène">Equipements d'entretien et d'hygiène</option>
+                            <option value="Equipements de sécurité">Equipements de sécurité</option>
+                            <option value="Equipements administratifs">Equipements administratifs</option>
+                            <option value="Equipements technologiques">Equipements technologiques</option>
+                            <option value="Equipements pédagogiques">Equipements pédagogiques</option>
+                        </select>
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Valeur</label>
+                        <input type="text" name="value" placeholder="Valeur financière de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Statut</label>
+                    <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                        <option selected disabled>Veuillez choisir le stattut</option>
+                        <option value="Fonctionnel">Fonctionnel</option>
+                        <option value="En reparation">En reparation</option>
+                        <option value="En panne">En panne</option>
+                        <option value="Obsolète">Obsolète</option>
+                    </select>
+                </div>
+                 
+                
+                <div>
+                    <label for="">Date de debut</label>
+                    <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+               
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal poour filtrer les profs -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="filter">
+        <form action="" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Ajouter un equipement</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Libelle</label>
+                    <input type="text" name="title" placeholder="Libelle de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+
+                <div>
+                    <label for="">Quantité</label>
+                    <input type="number" name="quantity" min="0" placeholder="Quantité disponible de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+               
+                <div>
+                    <label for="">Description</label>
+                    <textarea name="description" placeholder="Description de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full"></textarea>
+                </div>
+
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option selected disabled>Veuillez choisir le type d'equipement</option>
+                            <option value="">Equipements sportifs</option>
+                            <option value="">Equipements d'entretien et d'hygiène</option>
+                            <option value="">Equipements de sécurité</option>
+                            <option value="">Equipements administratifs</option>
+                            <option value="">Equipements technologiques</option>
+                            <option value="">Equipements pédagogiques</option>
+                        </select>
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Valeur</label>
+                        <input type="text" name="value" placeholder="Valeur financière de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Statut</label>
+                    <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full">
+                        <option selected disabled>Veuillez choisir le stattut</option>
+                        <option value="">Fonctionnel</option>
+                        <option value="">En reparation</option>
+                        <option value="">En panne</option>
+                        <option value="">Obsolète</option>
+                    </select>
+                </div>
+                 
+                
+                <div>
+                    <label for="">Date de debut</label>
+                    <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+               
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Update modal -->
+    {{ range .item}}
+    <div id="update-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <form action="/item/update/{{.ID}}" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+               <!-- Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold">Modifier un equipement</h2>
+                </div>
+
+                <!-- Body -->
+                <div class="mb-6 space-y-4">
+                    <div class="">
+                        <label for="">Libelle</label>
+                        <input type="text" name="title" placeholder="Libelle de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Title }}" required>
+                    </div>
+
+                    <div>
+                        <label for="">Quantité</label>
+                        <input type="number" name="quantity" min="0" placeholder="Quantité disponible de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Quantity }}" required>
+                    </div>
+                
+                    <div>
+                        <label for="">Description</label>
+                        <textarea name="description" placeholder="Description de l'équipement en question" class="border hover:outline-none focus:outline-none p-1 w-full" required>{{ .Description }}</textarea>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Type</label>
+                            <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Veuillez choisir le type d'equipement</option>
+                                <option value="Equipements sportifs" {{ if eq .Type "Equipements sportifs"}} selected {{ end }}>Equipements sportifs</option>
+                                <option value="Equipements d'entretien et d'hygiène" {{ if eq .Type "Equipements d'entretien et d'hygiène"}} selected {{ end }}>Equipements d'entretien et d'hygiène</option>
+                                <option value="Equipements de sécurité" {{ if eq .Type "Equipements de sécurité"}} selected {{ end }}>Equipements de sécurité</option>
+                                <option value="Equipements administratifs" {{ if eq .Type "Equipements administratifs"}} selected {{ end }}>Equipements administratifs</option>
+                                <option value="Equipements technologiques" {{ if eq .Type "Equipements technologiques"}} selected {{ end }}>Equipements technologiques</option>
+                                <option value="Equipements pédagogiques" {{ if eq .Type "Equipements pédagogiques"}} selected {{ end }}>Equipements pédagogiques</option>
+                            </select>
+                        </div>
+                    
+                        <div class="w-1/2">
+                            <label for="">Valeur</label>
+                            <input type="text" name="value" placeholder="Valeur financière de l'équipement" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Value }}" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="">Statut</label>
+                        <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled>Veuillez choisir le stattut</option>
+                            <option value="Fonctionnel" {{ if eq .Status "Fonctionnel"}} selected {{ end }}>Fonctionnel</option>
+                            <option value="En reparation" {{ if eq .Status "En reparation"}} selected {{ end }}>En reparation</option>
+                            <option value="En panne" {{ if eq .Status "En panne"}} selected {{ end }}>En panne</option>
+                            <option value="Obsolète" {{ if eq .Status "Obsolète"}} selected {{ end }}>Obsolète</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Date de debut</label>
+                            <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Start | formatDate }}" required>
+                        </div>
+                        <div class="w-1/2">
+                            <label for="">Date de clôture</label>
+                            <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Start | formatDate }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end space-x-2">
+                    <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Confirmer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ end}}
+
+    <!-- Delete modal -->
+    {{ range .item }}
+    <div id="delete-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-1">
+                    <h6 class="font-semibold text-xl text-red-950">Attention</h6>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        Vous êtes sur le point de supprimer un équipement. Cette action est irréversible.
+                    </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <form action="/item/delete/{{.ID}}" method="post">
+                        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">I accept</button>
+                    </form>
+                    <button data-modal-hide="delete-modal-{{.ID}}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</body>
+</html>
+

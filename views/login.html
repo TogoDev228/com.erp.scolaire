@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <title>Login</title>
+</head>
+<body class="bg-gray-100">
+    <main class="flex md:flex-row flex-col">
+        <div class="h-screen w-2/6 px-4 py-50">
+            <hr class="border-dotted my-7">
+
+            <form action="/login" method="post" class="space-y-4">
+                <input type="email" name="email" class="ps-2 py-2 w-full focus:outline-none hover:outline-none border border-gray-500" placeholder="Email" required>
+                <input type="password" name="password" class="ps-2 py-2 w-full focus:outline-none hover:outline-none border border-gray-500" placeholder="Password" required>
+                <button type="submit" class="bg-cyan-950 text-white font-medium py-2 w-full">Se Connecter</button>
+            </form>
+
+            <hr class="border-dotted my-7">
+
+            <p class="text-center">Vous n'avez pas de compte ? <a href="/register" class="text-cyan-700">Rejoignez nous</a></p>
+        </div>
+
+        <div class="bg-cyan-950 h-screen w-4/6">
+
+        </div>
+    </main>
+</body>
+</html>

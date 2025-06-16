@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/popup.js" defer></script>
+    <!-- Tailwind & Iconify -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <!-- Flowbite JS -->
+    <script src="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.js" defer></script>
+    <title>Liste des activités</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list" class="text-cyan-600"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-6 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Activité Actif</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Activité Inactif</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Activité Total</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+            </div>
+
+
+            <div class="my-5 space-x-3 mt-5">
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="AddModal()">Ajouter</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="FilterModal()">Filtrer</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer">Exporter</button>
+            </div>
+
+           <div class="bg-white border border-gray-300 px-4 py-6">
+                {{ if .activity }}
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-white font-thin uppercase bg-cyan-900">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Libelle
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Description
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Type
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Budget
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Lieu
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date de demarrage
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date de fin
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range .activity}}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ .Title}}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ .Description}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Type}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Budget}} XOF
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Location}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .Start | formatDate}}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ .End | formatDate}}
+                                </td>
+                                <td class="px-6 py-4 space-x-1">
+                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-green-900" data-modal-target="update-modal-{{.ID}}" data-modal-toggle="update-modal-{{.ID}}" type="button">
+                                        <iconify-icon icon="fluent:pen-32-filled" width="20" height="20"></iconify-icon>
+                                    </button>
+                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-red-900" data-modal-target="delete-modal-{{.ID}}" data-modal-toggle="delete-modal-{{.ID}}" type="button">
+                                        <iconify-icon icon="material-symbols:delete-outline-rounded" width="20" height="20"></iconify-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+                {{ else }}
+                <p class="text-2xl text-gray-800 text-center">Aucune activitée éxistante, veuillez en ajouté</p>
+                {{ end }}
+           </div>
+        </div>
+    </main>
+    
+
+
+    <!-- Modal d'ajout des activités -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="add">
+        <form action="/activity-list" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Ajouter une activité</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Libelle</label>
+                    <input type="text" name="title" placeholder="Libelle de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+               
+                <div class="">
+                    <label for="">Description</label>
+                    <textarea name="description" placeholder="Description détaillé de l'activité en question" class="border hover:outline-none focus:outline-none p-1 w-full" required></textarea>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option selected disabled>Veuillez choisir le type d'activité</option>
+                            <option value="Sportive">Sportive</option>
+                            <option value="Culturel">Culturel</option>
+                            <option value="Autres">Autres</option>
+                        </select>
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Budget (XOF)</label>
+                        <input type="number" name="budget" placeholder="Budget de l'activité. Ex: 50 000" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Lieu</label>
+                    <input type="text" name="location" placeholder="Lieu de déroulement de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+               
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Date de debut</label>
+                        <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+
+                    <div class="w-1/2">
+                        <label for="">Date de fin</label>
+                        <input type="date" name="end" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal poour filtrer les activités -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="filter">
+        <form action="" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Rechercher une activité</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Libelle</label>
+                    <input type="text" name="title" placeholder="Libelle de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+               
+                <div class="">
+                    <label for="">Description</label>
+                    <textarea name="description" placeholder="Description détaillé de l'activité en question" class="border hover:outline-none focus:outline-none p-1 w-full"></textarea>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option selected disabled>Veuillez choisir le type d'activité</option>
+                            <option value="">Sportive</option>
+                            <option value="">Culturel</option>
+                            <option value="">Autres</option>
+                        </select>
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Budget (XOF)</label>
+                        <input type="number" name="budget" placeholder="Budget de l'activité. Ex: 50 000" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Lieu</label>
+                    <input type="text" name="location" placeholder="Lieu de déroulement de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+               
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Date de debut</label>
+                        <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+
+                    <div class="w-1/2">
+                        <label for="">Date de fin</label>
+                        <input type="date" name="end" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    
+
+    <!-- Update modal -->
+    {{ range .activity}}
+    <div id="update-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <form action="/activity/update/{{.ID}}" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold">Modifier une activiter une activité</h2>
+                </div>
+
+                <!-- Body -->
+                <div class="mb-6 space-y-4">
+                    <div class="">
+                        <label for="">Libelle</label>
+                        <input type="text" name="title" placeholder="Libelle de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Title }}" required>
+                    </div>
+                
+                    <div class="">
+                        <label for="">Description</label>
+                        <textarea name="description" placeholder="Description détaillé de l'activité en question" class="border hover:outline-none focus:outline-none p-1 w-full" required>{{ .Description }}</textarea>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Type</label>
+                            <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Veuillez choisir le type d'activité</option>
+                                <option value="Sportive" {{ if eq .Type "Sportive" }} selected {{ end }}>Sportive</option>
+                                <option value="Culturel" {{ if eq .Type "Culturel" }} selected {{ end }}>Culturel</option>
+                                <option value="Autres" {{ if eq .Type "Autres" }} selected {{ end }}>Autres</option>
+                            </select>
+                        </div>
+                    
+                        <div class="w-1/2">
+                            <label for="">Budget (XOF)</label>
+                            <input type="number" name="budget" placeholder="Budget de l'activité. Ex: 50 000" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Budget }}" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="">Lieu</label>
+                        <input type="text" name="location" placeholder="Lieu de déroulement de l'activité" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Location }}" required>
+                    </div>
+                
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Date de debut</label>
+                            <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Start | formatDate }}" required>
+                        </div>
+
+                        <div class="w-1/2">
+                            <label for="">Date de fin</label>
+                            <input type="date" name="end" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .End | formatDate }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end space-x-2">
+                    <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Confirmer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ end}}
+
+    <!-- Delete modal -->
+    {{ range .activity }}
+    <div id="delete-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-1">
+                    <h6 class="font-semibold text-xl text-red-950">Attention</h6>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        Vous êtes sur le point de supprimer une activité. Cette action est irréversible.
+                    </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <form action="/activity/delete/{{.ID}}" method="post">
+                        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">I accept</button>
+                    </form>
+                    <button data-modal-hide="delete-modal-{{.ID}}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+
+</body>
+</html>
+

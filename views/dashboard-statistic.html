@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <title>Dashboard Statistic</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic" class="text-cyan-600"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-6 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div class="bg-white rounded-md border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Equipement(s)</h2>
+                <p class="text-2xl text-end mt-8">{{ .countItems}}</p>
+              </div>
+
+              <div class="bg-white rounded-md border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Log(s)</h2>
+                <p class="text-2xl text-end mt-8">{{ .countLogs}}</p>
+              </div>
+
+              <div class="bg-white rounded-md border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Depense(s)</h2>
+                <p class="text-2xl text-end mt-8">0 XOF</p>
+              </div>
+            </div>
+
+
+            <div class="flex flex-col flex-row space-x-5 mt-5">
+                <div class="rounded-md border border-gray-300 bg-white w-3/5 px-8 flex items-center">
+                    <div class="space-y-8 w-full">                    
+                        <div class="">
+                            <div class="flex justify-between mb-px">
+                                <h3 class="text-lg">Employé(es)</h3>
+                                <p class="text-lg">75/100</p>
+                            </div>
+                            <div class="bg-cyan-800 rounded-full w-full h-4">
+                                <div class="bg-cyan-500 rounded-full h-full" style="width: 75%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="flex justify-between mb-px">
+                                <h3 class="text-lg">Professeur(s)</h3>
+                                <p class="text-lg">25/100</p>
+                            </div>
+                            <div class="bg-cyan-800 rounded-full w-full h-4">
+                                <div class="bg-cyan-500 rounded-full h-full" style="width: 25%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="flex justify-between mb-px">
+                                <h3 class="text-lg">Apprenant(s)</h3>
+                                <p class="text-lg">10/100</p>
+                            </div>
+                            <div class="bg-cyan-800 rounded-full w-full h-4">
+                                <div class="bg-cyan-500 rounded-full h-full" style="width: 10%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="flex justify-between mb-px">
+                                <h3 class="text-lg">Salle(s)</h3>
+                                <p class="text-lg">90/100</p>
+                            </div>
+                            <div class="bg-cyan-800 rounded-full w-full h-4">
+                                <div class="bg-cyan-500 rounded-full h-full" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-md border border-gray-300 bg-white w-2/5 px-4 pt-6">
+                    <h2 class="font-semibold text-3xl">Historique</h2>
+                    <hr class="mt-3 mb-4 border-dotted">
+
+                    <div class="relative border-l border-gray-300 ml-4 pl-6 space-y-8 mb-6">
+                        <!-- Event 1 -->
+                        <div>
+                            <div class="point absolute w-5 h-5 bg-blue-500 rounded-full -left-2.5"></div>
+                            <h3 class="text-lg font-semibold text-gray-900">Étape 1 : Inscription</h3>
+                            <time class="block mb-2 text-sm text-gray-500">Janvier 2024</time>
+                        </div>
+
+                        <!-- Event 2 -->
+                        <div>
+                            <div class="point absolute w-5 h-5 bg-green-500 rounded-full -left-2.5"></div>
+                            <h3 class="text-lg font-semibold text-gray-900">Étape 2 : Formation</h3>
+                            <time class="block mb-2 text-sm text-gray-500">Février 2024</time>
+                        </div>
+
+                        <!-- Event 3 -->
+                        <div>
+                            <div class="point absolute w-5 h-5 bg-yellow-500 rounded-full -left-2.5"></div>
+                            <h3 class="text-lg font-semibold text-gray-900">Étape 3 : Certification</h3>
+                            <time class="block mb-2 text-sm text-gray-500">Mars 2024</time>
+                        </div>
+
+                        <!-- Event 4 -->
+                        <div>
+                            <div class="point absolute w-5 h-5 bg-yellow-500 rounded-full -left-2.5"></div>
+                            <h3 class="text-lg font-semibold text-gray-900">Étape 4 : Certification</h3>
+                            <time class="block mb-2 text-sm text-gray-500">Mars 2024</time>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="flex space-x-5 mt-5">
+                <div class="grid grid-cols-4 gap-4 w-full">
+                        <div class="bg-white border border-gray-300 h-34">
+                            <div class="border-l-8 border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Presence moyen</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-sm border border-gray-300 h-34">
+                            <div class="border-l-6 rounded-sm border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Redoublement</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-sm border border-gray-300 h-34">
+                            <div class="border-l-6 rounded-sm border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Imprevu</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-sm border border-gray-300 h-34">
+                            <div class="border-l-6 rounded-sm border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Journal d'activité</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-sm border border-gray-300 h-34">
+                            <div class="border-l-6 rounded-sm border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Reussite au Examen</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-gray-300 h-34">
+                            <div class="border-l-8 border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">élèves / enseignant</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-gray-300 h-34">
+                            <div class="border-l-8 border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Garçon</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-gray-300 h-34">
+                            <div class="border-l-8 border-cyan-950 h-full px-3 pt-3">
+                                <h4 class="text-2xl font-bold">Fille</h4>
+                                <p class="text-2xl mt-13 font-bold text-end">0</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

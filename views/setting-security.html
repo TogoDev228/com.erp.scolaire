@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>*
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <title>Parametre - Gestion de la sécurité</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list" class="text-cyan-600"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-5 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="flex space-x-3">
+                <div class="bg-white border border-gray-300 w-1/5 rounded-lg pt-6 pb-14 px-2">
+                    <h1 class="text-center text-2xl font-semibold mb-8">Parametre</h1>
+
+                    <div class="space-y-2">
+                        <a href="/setting-class" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Gérer les classes</a>
+                        <a href="/setting-lesson" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Gérer les matières</a>
+                        <a href="/setting-log" class="block rounded-md font-medium border border-gray-300 bg-gray-100 w-full ps-4 py-4">Logs</a>
+                        <a href="/setting-security" class="block rounded-md font-medium text-white bg-cyan-950 border border-gray-300 w-full ps-4 py-4">Accès du compte</a>
+                        <a href="/setting-general" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Parametre généraux</a>
+                        <a href="/setting-notification" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Notifications & alertes</a>
+                    </div>
+                    
+                </div>
+
+                <div class="bg-white border border-gray-300 w-4/5 rounded-lg py-6 px-8">
+                    <form action="" method="post" class="space-y-6">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label for="name" class="font-medium">Nom</label>
+                                <input type="text" name="name" id="name" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="font-medium">Email</label>
+                                <input type="email" name="email" id="email" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                            
+                            <div>
+                                <label for="role" class="font-medium">Rôle</label>
+                                <input type="text" name="role" id="role" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <label for="pwd" class="font-medium">Ancien mot de passe</label>
+                                <input type="password" name="pwd" id="pwd" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                            
+                            <div>
+                                <label for="n-pwd" class="font-medium">Nouveau mot de passe</label>
+                                <input type="password" name="n-pwd" id="n-pwd" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                            
+                            <div>
+                                <label for="c-n-pwd" class="font-medium">Confirmer le nouveau mot de passe</label>
+                                <input type="password" name="c-n-pwd" id="c-n-pwd" class="hover:outline-none focus:outline-none border border-gray-300 rounded-md w-full py-1 ps-2" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
+

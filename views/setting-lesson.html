@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <title>Parametre - Gestion des Matières</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list" class="text-cyan-600"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-5 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="flex space-x-3">
+                <div class="bg-white border border-gray-300 w-1/5 rounded-lg pt-6 pb-14 px-2">
+                    <h1 class="text-center text-2xl font-semibold mb-8">Parametre</h1>
+
+                    <div class="space-y-2">
+                        <a href="/setting-class" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Gérer les classes</a>
+                        <a href="/setting-lesson" class="block rounded-md font-medium text-white bg-cyan-950 w-full ps-4 py-4">Gérer les matières</a>
+                        <a href="/setting-log" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Logs</a>
+                        <a href="/setting-security" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Accès du compte</a>
+                        <a href="/setting-general" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Parametre généraux</a>
+                        <a href="/setting-notification" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Notifications & alertes</a>
+                    </div>
+                    
+                </div>
+
+                <div class="bg-white border border-gray-300 w-4/5 rounded-lg py-6 px-8">
+                    <h2 class="font-semibold text-2xl">Matière(s)</h2>
+
+                    <form action="" method="post" class="flex my-5 space-x-1">
+                        <input type="text" name="title" placeholder="Libelle de la matière" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-lg py-2 ps-4" required>
+                        <button class="font-medium bg-cyan-900 hover:bg-cyan-900 rounded-md text-white py-2 px-10">Ajouter</button>
+                    </form>
+                   
+                    {{ if .lesson}}
+                    <div class="grid grid-cols-5 gap-2">
+                        {{ range .lesson}}
+                        <div class="border border-gray-300 bg-gray-50 rounded-sm">
+                            <h3 class="text-gray-800 font-medium text-center py-4">{{ .Title}}</h3>
+                        </div>
+                        {{ end }}
+                    </div>
+                    {{ else }}
+                    <p class="text-2xl text-center text-gray-800">Aucune matière disponible, veuillez en ajouté</p>
+                    {{ end }}
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
+

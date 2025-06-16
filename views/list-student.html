@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/popup.js" defer></script>
+    <!-- Tailwind & Iconify -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <!-- Flowbite JS -->
+    <script src="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.js" defer></script>
+    <title>Liste des étudiants</title>
+</head>
+<body class="bg-gray-50">
+    <main class="flex">
+        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <!-- Navbar -->
+            <ul class="py-9 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/student-list" class="text-cyan-600"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
+                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            </ul>
+        </div>
+
+        <div class="px-6 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Apprenants Actif</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Apprenants Inactif</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+
+              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
+                <h2 class="text-2xl">Apprenants Total</h2>
+                <p class="text-2xl text-end mt-8">0</p>
+              </div>
+            </div>
+
+
+            <div class="my-5 space-x-3 mt-5">
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="openModal('add')">Ajouter</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="openModal('filter')">Filtrer</button>
+                
+                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer">Exporter</button>
+            </div>
+
+           <div class="bg-white border border-gray-300 px-4 py-6">
+                {{ if .student}}
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-white font-thin uppercase bg-cyan-900">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Matricule
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Nom
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Sexe
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Niveau d'étude
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Email
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Tel
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Type
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Type d'inscription
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Matrimonial
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Statut
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Date d'arrivé
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Année Scolaire
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{ range .student }}
+                                <tr>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ .Matricul}}
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .FirstName}} {{ .LastName}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Sexe}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Grade}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Email}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Phone}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Type}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .TypeInscription}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Matrimonial}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Statut}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .Start | formatDate}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ .SchoolYear}}
+                                    </td>
+                                    <td class="px-6 py-4 space-x-1 flex">
+                                        <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-green-900" data-modal-target="update-modal-{{.ID}}" data-modal-toggle="update-modal-{{.ID}}" type="button">
+                                            <iconify-icon icon="fluent:pen-32-filled" width="20" height="20"></iconify-icon>
+                                        </button>
+                                        <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-red-900" data-modal-target="delete-modal-{{.ID}}" data-modal-toggle="delete-modal-{{.ID}}" type="button">
+                                            <iconify-icon icon="material-symbols:delete-outline-rounded" width="20" height="20"></iconify-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{ end }}
+                            </tbody>
+                        </table>
+                    </div>
+                {{else}}
+                    <p class="text-2xl text-gray-800 text-center">Aucun apprenant éxistant, veuillez en ajouté</p>
+                {{ end }}
+           </div>
+        </div>
+    </main>
+
+
+    <!-- Modal d'ajout des apprenants -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="add">
+        <form action="/student-list" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6" style="scrollbar-width: none;">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Ajouter un apprenant</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Matricule</label>
+                    <input type="text" name="matricul" placeholder="Matricule de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                </div>
+               
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Nom</label>
+                        <input type="text" name="firstName" placeholder="Nom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Prenom</label>
+                        <input type="text" name="lastName" placeholder="Prenom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                </div>
+
+               
+                <div>
+                    <label for="">Sexe</label>
+                    <select name="sexe" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                        <option selected disabled>Veuillez choisir le sexe</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Feminin">Feminin</option>
+                        <option value="Autres">Autres</option>
+                        <option value="Autres">Non definie</option>
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Email</label>
+                        <input type="email" name="email" placeholder="Email de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                    
+                    <div class="w-1/2">
+                        <label for="">Numèro de téléphone</label>
+                        <input type="tel" name="phone" placeholder="Numéro de téléphone de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Niveau d'étude</label>
+                    <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                        <option disabled selected>Choisir la classe</option>
+                        {{ range .class}}
+                        <option value="{{ .Title}}">{{ .Title}}</option>    
+                        {{ end }}
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type d'apprenant</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled selected>Choisir le type d'apprenant</option>
+                            <option value="Régulier">Régulier</option>
+                            <option value="Boursier">Boursier</option>
+                            <option value="Sportif de haut niveau">Sportif de haut niveau</option>
+                            <option value="Handicapé">Handicapé</option>
+                            <option value="Internationnal">Internationnal</option>
+                            <option value="En alternance">En alternance</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="">Situation matrimoniale</label>
+                        <select name="matrimonial" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled selected>Choisir sa situation matrimoniale</option>
+                            <option value="initial">Célibataire</option>
+                            <option value="reinscription">Marié</option>
+                            <option value="transfert">Divorce</option>
+                            <option value="externe">Veuf</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Statut</label>
+                        <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled selected>Statut de l'apprenant</option>
+                            <option value="inscrit">Inscrit</option>
+                            <option value="En attente">En attente</option>
+                            <option value="exclu">Exclu</option>
+                            <option value="demissionnaire">Démissionnaire</option>
+                            <option value="diplome">Diplomé</option>
+                            <option value="abandon">Abandon</option>
+                            <option value="radie">Radie</option>
+                            <option value="suspendu">Suspendu</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="">Inscription</label>
+                        <select name="inscription" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled selected>Choisir le type de l'inscription</option>
+                            <option value="Initial">Initial</option>
+                            <option value="Réinscription">Réinscription</option>
+                            <option value="Externe">Transfert</option>
+                            <option value="Externe">Externe</option>
+                            <option value="En audit">En audit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Date d'arrivé</label>
+                        <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                    </div>
+
+                    <div class="w-1/2">
+                        <label for="">Année Scolaire</label>
+                        <select name="schoolYear" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled selected>Choisir l'année scolaire</option>
+                            <option value="2025-2026">2027-2028</option>
+                            <option value="2025-2026">2026-2027</option>
+                            <option value="2025-2026">2025-2026</option>
+                            <option value="2024-2025">2024-2025</option>
+                            <option value="2023-2024">2023-2024</option>
+                            <option value="2022-2023">2022-2023</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal poour filtrer les apprenants -->
+    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="filter">
+        <form action="" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6" style="scrollbar-width: none;">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Rechercher un apprenant</h2>
+            </div>
+
+            <!-- Body -->
+            <div class="mb-6 space-y-4">
+                <div class="">
+                    <label for="">Matricule</label>
+                    <input type="text" name="Matricul" placeholder="Matricule de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full">
+                </div>
+               
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Nom</label>
+                        <input type="text" name="FirstName" placeholder="Nom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                
+                    <div class="w-1/2">
+                        <label for="">Prenom</label>
+                        <input type="text" name="LastName" placeholder="Prenom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                </div>
+
+               
+                <div>
+                    <label for="">Sexe</label>
+                    <select name="Sexe" class="border hover:outline-none focus:outline-none p-1 w-full">
+                        <option selected disabled>Veuillez choisir le sexe</option>
+                        <option value="Masculin">Masculin</option>
+                        <option value="Feminin">Feminin</option>
+                        <option value="Autres">Autres</option>
+                        <option value="Autres">Non definie</option>
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Email</label>
+                        <input type="email" name="Email" placeholder="Email de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                    
+                    <div class="w-1/2">
+                        <label for="">Numèro de téléphone</label>
+                        <input type="text" name="Phone" placeholder="Numéro de téléphone de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="">Niveau d'étude</label>
+                    <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full">
+                        <option disabled selected>Choisir la classe</option>
+                        <option value="">CP1</option>
+                        <option value="">CP2</option>
+                        <option value="">CE1</option>
+                        <option value="">CE2</option>
+                        <option value="">CM1</option>
+                        <option value="">CM2</option>
+                        <option value="">6e</option>
+                        <option value="">5e</option>
+                        <option value="">4e</option>
+                        <option value="">3e</option>
+                        <option value="">Seconde</option>
+                        <option value="">Première</option>
+                        <option value="">Terminale</option>
+                    </select>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Type d'apprenant</label>
+                        <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option disabled selected>Choisir le type d'apprenant</option>
+                            <option value="inscrit">Régulier</option>
+                            <option value="en_attente">Boursier</option>
+                            <option value="exclu">Sportif de haut niveau</option>
+                            <option value="diplome">Handicapé</option>
+                            <option value="abandon">Internationnal</option>
+                            <option value="radie">En alternance</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="">Situation matrimoniale</label>
+                        <select name="matrimonial" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option disabled selected>Choisir sa situation matrimoniale</option>
+                            <option value="initial">Célibataire</option>
+                            <option value="reinscription">Marié</option>
+                            <option value="transfert">Divorce</option>
+                            <option value="externe">Veuf</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Statut</label>
+                        <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option disabled selected>Statut de l'apprenant</option>
+                            <option value="inscrit">Inscrit</option>
+                            <option value="en_attente">En attente</option>
+                            <option value="exclu">Exclu</option>
+                            <option value="demissionnaire">Démissionnaire</option>
+                            <option value="diplome">Diplomé</option>
+                            <option value="abandon">Abandon</option>
+                            <option value="radie">Radie</option>
+                            <option value="suspendu">Suspendu</option>
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="">Inscription</label>
+                        <select name="inscription" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option disabled selected>Choisir le type de l'inscription</option>
+                            <option value="initial">Initial</option>
+                            <option value="reinscription">Réinscription</option>
+                            <option value="transfert">Transfert</option>
+                            <option value="externe">Externe</option>
+                            <option value="en_audit">En audit</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="">Date d'arrivé</label>
+                        <input type="date" name="Start" class="border hover:outline-none focus:outline-none p-1 w-full">
+                    </div>
+
+                    <div class="w-1/2">
+                        <label for="">Année Scolaire</label>
+                        <select name="matrimonial" class="border hover:outline-none focus:outline-none p-1 w-full">
+                            <option disabled selected>Choisir l'année scolaire</option>
+                            <option value="">2025-2026</option>
+                            <option value="">2024-2025</option>
+                            <option value="">2023-2024</option>
+                            <option value="">2022-2023</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex justify-end space-x-2">
+                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Confirmer
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Update modal -->
+    {{ range .student}}
+    <div id="update-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <form action="/student/update/{{.ID}}" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6" style="scrollbar-width: none;">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold">Modifier un apprenant</h2>
+                </div>
+
+                <!-- Body -->
+                <div class="mb-6 space-y-4">
+                    <div class="">
+                        <label for="">Matricule</label>
+                        <input type="text" name="matricul" placeholder="Matricule de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Matricul }}" required>
+                    </div>
+                
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Nom</label>
+                            <input type="text" name="firstName" placeholder="Nom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .FirstName }}" required>
+                        </div>
+                    
+                        <div class="w-1/2">
+                            <label for="">Prenom</label>
+                            <input type="text" name="lastName" placeholder="Prenom de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .LastName }}" required>
+                        </div>
+                    </div>
+
+                
+                    <div>
+                        <label for="">Sexe</label>
+                        <select name="sexe" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled>Veuillez choisir le sexe</option>
+                            <option value="Masculin" {{if eq .Sexe "Masculin"}}selected{{end}}>Masculin</option>
+                            <option value="Feminin" {{if eq .Sexe "Feminin"}}selected{{end}}>Feminin</option>
+                            <option value="Autres" {{if eq .Sexe "Autres"}}selected{{end}}>Autres</option>
+                        </select>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Email</label>
+                            <input type="email" name="email" placeholder="Email de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Email }}" required>
+                        </div>
+                        
+                        <div class="w-1/2">
+                            <label for="">Numèro de téléphone</label>
+                            <input type="tel" name="phone" placeholder="Numéro de téléphone de l'apprenant" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Phone }}" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="">Niveau d'étude</label>
+                        <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                            <option disabled>Choisir la classe</option>
+                            {{ range $.class}}
+                            <option value="{{ .Title }}" {{ if eq $.Grade .Title }}selected{{ end }}>{{ .Title }}</option>
+                            {{ end }}
+                        </select>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Type d'apprenant</label>
+                            <select name="type" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Choisir le type d'apprenant</option>
+                                <option value="Régulier" {{if eq .Type "Régulier"}}selected{{end}}>Régulier</option>
+                                <option value="Boursier" {{if eq .Type "Boursier"}}selected{{end}}>Boursier</option>
+                                <option value="Sportif de haut niveau" {{if eq .Type "Sportif de haut niveau"}}selected{{end}}>Sportif de haut niveau</option>
+                                <option value="Handicapé" {{if eq .Type "Handicapé"}}selected{{end}}>Handicapé</option>
+                                <option value="Internationnal" {{if eq .Type "Internationnal"}}selected{{end}}>Internationnal</option>
+                                <option value="En alternance" {{if eq .Type "En alternance"}}selected{{end}}>En alternance</option>
+                            </select>
+                        </div>
+                        <div class="w-1/2">
+                            <label for="">Situation matrimoniale</label>
+                            <select name="matrimonial" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Choisir sa situation matrimoniale</option>
+                                <option value="Célibataire" {{if eq .Matrimonial "Célibataire"}}selected{{end}}>Célibataire</option>
+                                <option value="Marié" {{if eq .Matrimonial "Marié"}}selected{{end}}>Marié</option>
+                                <option value="Divorce" {{if eq .Matrimonial "Divorce"}}selected{{end}}>Divorce</option>
+                                <option value="Veuf" {{if eq .Matrimonial "Veuf"}}selected{{end}}>Veuf</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Statut</label>
+                            <select name="statut" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Statut de l'apprenant</option>
+                                <option value="Inscrit" {{if eq .Statut "Inscrit"}}selected{{end}}>Inscrit</option>
+                                <option value="En attente" {{if eq .Statut "En attente"}}selected{{end}}>En attente</option>
+                                <option value="Exclu" {{if eq .Statut "Exclu"}}selected{{end}}>Exclu</option>
+                                <option value="Démissionnaire" {{if eq .Statut "Démissionnaire"}}selected{{end}}>Démissionnaire</option>
+                                <option value="Diplomé" {{if eq .Statut "Diplomé"}}selected{{end}}>Diplomé</option>
+                                <option value="Abandon" {{if eq .Statut "Abandon"}}selected{{end}}>Abandon</option>
+                                <option value="Radie" {{if eq .Statut "Radie"}}selected{{end}}>Radie</option>
+                                <option value="Suspendu" {{if eq .Statut "Suspendu"}}selected{{end}}>Suspendu</option>
+                            </select>
+                        </div>
+                        <div class="w-1/2">
+                            <label for="">Inscription</label>
+                            <select name="inscription" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Choisir le type de l'inscription</option>
+                                <option value="Initial" {{if eq .TypeInscription "Initial"}}selected{{end}}>Initial</option>
+                                <option value="Réinscription" {{if eq .TypeInscription "Réinscription"}}selected{{end}}>Réinscription</option>
+                                <option value="Transfert" {{if eq .TypeInscription "Transfert"}}selected{{end}}>Transfert</option>
+                                <option value="Externe" {{if eq .TypeInscription "Externe"}}selected{{end}}>Externe</option>
+                                <option value="En audit" {{if eq .TypeInscription "En audit"}}selected{{end}}>En audit</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-2">
+                        <div class="w-1/2">
+                            <label for="">Date d'arrivé</label>
+                            <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Start | formatDate }}" required>
+                        </div>
+
+                        <div class="w-1/2">
+                            <label for="">Année Scolaire</label>
+                            <select name="schoolYear" class="border hover:outline-none focus:outline-none p-1 w-full" required>
+                                <option disabled>Choisir l'année scolaire</option>
+                                <option value="2027-2028" {{if eq .SchoolYear "2025-2026"}}selected{{end}}>2027-2028</option>
+                                <option value="2026-2027" {{if eq .SchoolYear "2025-2026"}}selected{{end}}>2026-2027</option>
+                                <option value="2025-2026" {{if eq .SchoolYear "2025-2026"}}selected{{end}}>2025-2026</option>
+                                <option value="2024-2025" {{if eq .SchoolYear "2024-2025"}}selected{{end}}>2024-2025</option>
+                                <option value="2023-2024" {{if eq .SchoolYear "2023-2024"}}selected{{end}}>2023-2024</option>
+                                <option value="2022-2023" {{if eq .SchoolYear "2022-2023"}}selected{{end}}>2022-2023</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="flex justify-end space-x-2">
+                    <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Confirmer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ end}}
+
+    <!-- Delete modal -->
+    {{ range .student }}
+    <div id="delete-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal body -->
+                <div class="p-4 md:p-5 space-y-1">
+                    <h6 class="font-semibold text-xl text-red-950">Attention</h6>
+                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        Vous êtes sur le point de supprimer un apprenant. Cette action est irréversible.
+                    </p>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <form action="/student/delete/{{.ID}}" method="post">
+                        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">I accept</button>
+                    </form>
+                    <button data-modal-hide="delete-modal-{{.ID}}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</body>
+</html>
