@@ -8,13 +8,16 @@ import (
 
 type Activity struct {
 	ID          uint      `gorm:"primaryKey"`
-	Title       string    `gorm:"size:100;not null"` // Nom de l’activité
-	Description string    `gorm:"type:text"`         // Détails
-	Type        string    `gorm:"size:50"`           // Ex : "Sportive", "Culturelle", etc.
-	Budget      string    `gorm:"size:100"`          // Montant alloué
-	Location    string    `gorm:"size:100"`          // Lieu
-	Start       time.Time `gorm:"not null"`          // Date de début
-	End         time.Time `gorm:"not null"`          // Date de fin
+	Title       string    `gorm:"size:100;not null"`
+	Description string    `gorm:"type:text"`
+	Type        string    `gorm:"size:50"`
+	Budget      string    `gorm:"size:100"`
+	Location    string    `gorm:"size:100"`
+	Status      string    `gorm:"size:100"`
+	SchoolYear  string    `gorm:"size:100"`
+	Creator     string    `gorm:"size:120;not null"`
+	Start       time.Time `gorm:"not null"`
+	End         time.Time `gorm:"not null"`
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	DeletedAt   gorm.DeletedAt `gorm:"index"`
@@ -52,7 +55,7 @@ func DeleteActivity(db *gorm.DB, id uint) error {
 	return db.Delete(&Activity{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de Activity existant dans la database
 func CountActivities(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Activity{}).Count(&count).Error

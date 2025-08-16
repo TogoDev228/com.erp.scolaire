@@ -65,7 +65,7 @@ func ListStaff(db *gorm.DB) ([]Staff, error) {
 	return list, err
 }
 
-// Nombre de prof existant dans la database
+// Nombre de staff existant dans la database
 func CountStaff(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Staff{}).Count(&count).Error

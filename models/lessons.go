@@ -8,10 +8,10 @@ import (
 
 type Lesson struct {
 	ID        uint   `gorm:"primaryKey"`
-	Title     string `gorm:"size:100;not null;unique"` // Exemple : "Mathématiques", "Histoire"
+	Title     string `gorm:"size:100;not null;unique"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"` // Pour soft delete
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 // CreateLesson ajoute une leçon
@@ -53,7 +53,7 @@ func DeleteLesson(db *gorm.DB, id uint) error {
 	return db.Delete(&Lesson{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de Lesson existant dans la database
 func CountLessons(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Lesson{}).Count(&count).Error

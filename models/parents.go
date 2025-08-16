@@ -15,7 +15,7 @@ type Parent struct {
 	Position  string    `gorm:"size:100"` // Ex: "Fonctionnaire", "Commerçant"
 	Email     string    `gorm:"size:20"`
 	Phone     string    `gorm:"size:20"`
-	Start     time.Time `gorm:"not null"`  // Converti en time.Time (meilleure gestion)
+	Start     time.Time `gorm:"not null"` 
 	Children  int       `gorm:"default:0"` // Nombre d'enfants scolarisés
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -28,7 +28,7 @@ func CreateParent(db *gorm.DB, parent *Parent) error {
 
 func GetParentByID(db *gorm.DB, id uint) (*Parent, error) {
 	var parent Parent
-	err := db.Preload("Students").First(&parent, id).Error
+	err := db.First(&parent, id).Error
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func DeleteParent(db *gorm.DB, id uint) error {
 	return db.Delete(&Parent{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de parent existant dans la database
 func CountParent(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Parent{}).Count(&count).Error

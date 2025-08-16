@@ -292,7 +292,6 @@ func UpdateProf(c *gin.Context, db *gorm.DB) {
 	sexe := c.PostForm("sexe")
 	grade := c.PostForm("grade")
 	email := c.PostForm("email")
-	lesson := c.PostForm("lesson")
 	phone := c.PostForm("phone")
 	startStr := c.PostForm("start")
 
@@ -314,7 +313,6 @@ func UpdateProf(c *gin.Context, db *gorm.DB) {
 	prof.Sexe = sexe
 	prof.Grade = grade
 	prof.Email = email
-	prof.Lesson = lesson
 	prof.Phone = phone
 	prof.Start = start
 

@@ -27,11 +27,11 @@ func main() {
 		&models.Parent{},
 		&models.Log{},
 		&models.Lesson{},
-		&models.History{},
+		&models.TransactionHistory{},
 		&models.Class{},
 		&models.Activity{},
 		&models.Item{},
-		&models.Year{},
+		&models.SchoolYear{},
 	)
 
 	r := gin.Default()

@@ -8,7 +8,7 @@ import (
 
 type Class struct {
 	ID        uint   `gorm:"primaryKey"`
-	Title     string `gorm:"size:100;not null;unique"` // Exemple : "6e A", "Terminale S", etc.
+	Title     string `gorm:"size:100;not null;unique"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`
@@ -46,7 +46,7 @@ func DeleteClass(db *gorm.DB, id uint) error {
 	return db.Delete(&Class{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de Class existant dans la database
 func CountClass(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Class{}).Count(&count).Error

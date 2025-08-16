@@ -8,17 +8,17 @@ import (
 
 type Item struct {
 	ID          uint       `gorm:"primaryKey"`
-	Title       string     `gorm:"size:100;not null"` // Nom de l’objet
-	Description string     `gorm:"type:text"`         // Détails optionnels
-	Type        string     `gorm:"size:50;not null"`  // Ex: "Equipements sportifs", "Equipements de sécurité", "Equipements technologiques"
-	Value       string     `gorm:"size:50"`           // Prix ou référence
-	Quantity    int        // Quantité disponible
-	Status      string     `gorm:"size:50"`  // Ex: "Bon", "Réparé", "HS"
-	Start       time.Time  `gorm:"not null"` // Date d’ajout/mise en service
-	Repair      *time.Time // Date de dernière réparation
+	Title       string     `gorm:"size:100;not null"` 
+	Description string     `gorm:"type:text"`        
+	Type        string     `gorm:"size:50;not null"`
+	Value       string     `gorm:"size:50"`
+	Quantity    int        
+	Status      string     `gorm:"size:50"`
+	Start       time.Time  `gorm:"not null"`
+	Repair      *time.Time
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
-	DeletedAt   gorm.DeletedAt `gorm:"index"` // Pour soft delete
+	DeletedAt   gorm.DeletedAt `gorm:"index"`
 }
 
 // CreateItem ajoute un nouvel item
@@ -60,28 +60,28 @@ func DeleteItem(db *gorm.DB, id uint) error {
 	return db.Delete(&Item{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de item existant dans la database
 func CountItems(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Item{}).Count(&count).Error
 	return count, err
 }
 
-// Nombre de prof existant dans la database
+// Nombre de item existant dans la database
 func CountItemsIT(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Item{}).Where("type = ?", "Equipements technologiques").Count(&count).Error
 	return count, err
 }
 
-// Nombre de prof existant dans la database
+// Nombre de item existant dans la database
 func CountItemsEducational(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Item{}).Where("type = ?", "Equipements pédagogiques").Count(&count).Error
 	return count, err
 }
 
-// Nombre de prof existant dans la database
+// Nombre de item existant dans la database
 func CountItemsAdministratifs(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Item{}).Where("type = ?", "Equipements administratifs").Count(&count).Error

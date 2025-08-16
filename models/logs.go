@@ -43,7 +43,7 @@ func DeleteLog(db *gorm.DB, id uint) error {
 	return db.Delete(&Log{}, id).Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre de Log existant dans la database
 func CountLogs(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&Log{}).Count(&count).Error

@@ -11,7 +11,6 @@ type Prof struct {
 	Matricul  string    `gorm:"size:50;unique;not null"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
-	Lesson    string    `gorm:"size:100;not null"` // Matière enseignée, ex: "Mathématiques"
 	Sexe      string    `gorm:"size:10"`
 	Email     string    `gorm:"size:100;unique"`
 	Grade     string    `gorm:"size:50"` // ex: "Agrégé", "Contractuel"

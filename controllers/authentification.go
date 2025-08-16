@@ -18,7 +18,7 @@ func Register(c *gin.Context, db *gorm.DB) {
 	email := c.PostForm("email")
 	password := c.PostForm("password")
 
-	user := &models.User{Name: name, Email: email, Password: password}
+	user := &models.User{Username: name, Email: email, Password: password}
 	if err := models.CreateUser(db, user); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur : %v", err)
 		return

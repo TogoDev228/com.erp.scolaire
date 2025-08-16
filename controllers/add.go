@@ -202,7 +202,6 @@ func AddProf(c *gin.Context, db *gorm.DB) {
 	sexe := c.PostForm("sexe")
 	grade := c.PostForm("grade")
 	email := c.PostForm("email")
-	lesson := c.PostForm("lesson")
 	phone := c.PostForm("phone")
 	startStr := c.PostForm("start")
 
@@ -213,7 +212,7 @@ func AddProf(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
-	prof := &models.Prof{Matricul: matricul, FirstName: firstName, LastName: lastName, Lesson: lesson, Sexe: sexe, Grade: grade, Email: email, Phone: phone, Start: start}
+	prof := &models.Prof{Matricul: matricul, FirstName: firstName, LastName: lastName, Sexe: sexe, Grade: grade, Email: email, Phone: phone, Start: start}
 
 	if err := models.CreateProf(db, prof); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur : %v", err)

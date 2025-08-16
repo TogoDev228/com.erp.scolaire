@@ -9,11 +9,14 @@ import (
 
 type User struct {
 	ID        uint   `gorm:"primaryKey"`
-	Name      string `gorm:"size:100;not null"`
-	Email     string `gorm:"size:100;unique;not null"`
+	Username  string `gorm:"size:100;unique;not null"`
+	Email     string `gorm:"size:150;unique;not null"`
 	Password  string `gorm:"not null"`
+	Role      string `gorm:"not null"`
+	LastLogin time.Time
 	CreatedAt time.Time
 	UpdatedAt time.Time
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 func HashPassword(password string) (string, error) {
@@ -41,7 +44,7 @@ func FindUserByEmail(db *gorm.DB, email string) (*User, error) {
 	return &user, result.Error
 }
 
-// Nombre de prof existant dans la database
+// Nombre d'user existant dans la database
 func CountUsers(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&User{}).Count(&count).Error
