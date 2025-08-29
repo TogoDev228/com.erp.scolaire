@@ -8,7 +8,7 @@ import (
 
 type Planning struct {
 	ID         uint      `gorm:"primaryKey"`
-	Title      int       `gorm:"size:120;unique;not null"`
+	Title      string       `gorm:"size:120;unique;not null"`
 	Type       string    `gorm:"size:70;not null"`
 	Class      string    `gorm:"size:100;not null"`
 	SchoolYear string    `gorm:"not null"`

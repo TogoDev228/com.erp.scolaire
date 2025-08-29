@@ -7,11 +7,11 @@ import (
 )
 
 type Remediation struct {
-	ID          uint   `gorm:"primaryKey"`
+	ID          uint64   `gorm:"primaryKey"`
 	Title       string `gorm:"not null"`
 	Description string `gorm:"type:text"`
-	StudentID   int    `gorm:"not null"`
-	TeacherID   int    `gorm:"not null"`
+	StudentID   uint64 `gorm:"not null"`
+	TeacherID   uint64 `gorm:"not null"`
 	Status      string `gorm:"size:50;not null"`
 	Start       time.Time
 	End         time.Time

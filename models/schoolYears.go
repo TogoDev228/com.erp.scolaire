@@ -17,12 +17,12 @@ type SchoolYear struct {
 }
 
 // Crée une nouvelle année scolaire
-func CreateYear(db *gorm.DB, schoolYear *SchoolYear) error {
+func CreateSchoolYear(db *gorm.DB, schoolYear *SchoolYear) error {
 	return db.Create(schoolYear).Error
 }
 
 // Récupère une année par son ID
-func GetYearByID(db *gorm.DB, id uint) (*SchoolYear, error) {
+func GetSchoolYearByID(db *gorm.DB, id uint) (*SchoolYear, error) {
 	var schoolYear SchoolYear
 	err := db.First(&schoolYear, id).Error
 	if err != nil {
@@ -32,17 +32,17 @@ func GetYearByID(db *gorm.DB, id uint) (*SchoolYear, error) {
 }
 
 // Modifie une année scolaire
-func UpdateYear(db *gorm.DB, schoolYear *SchoolYear) error {
+func UpdateSchoolYear(db *gorm.DB, schoolYear *SchoolYear) error {
 	return db.Save(schoolYear).Error
 }
 
 // Supprime une année scolaire (soft delete si DeletedAt est activé)
-func DeleteYear(db *gorm.DB, id uint) error {
+func DeleteSchoolYear(db *gorm.DB, id uint) error {
 	return db.Delete(&SchoolYear{}, id).Error
 }
 
 // Liste toutes les années scolaires
-func ListYears(db *gorm.DB) ([]SchoolYear, error) {
+func ListSchoolYears(db *gorm.DB) ([]SchoolYear, error) {
 	var schoolYear []SchoolYear
 	err := db.Order("start DESC").Find(&schoolYear).Error
 	return schoolYear, err

@@ -7,10 +7,13 @@ import (
 )
 
 type Exam struct {
-	ID         uint   `gorm:"primaryKey"`
-	TeacherID  int    `gorm:"not null"`
-	Lesson     string `gorm:"not null"`
+	ID         uint64   `gorm:"primaryKey"`
+	Title      string `gorm:"not null"`
+	Type       string `gorm:"not null"`
+	Status     string `gorm:"not null"`
 	SchoolYear string `gorm:"not null"`
+	Start      time.Time
+	End        time.Time
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	DeletedAt  gorm.DeletedAt `gorm:"index"`

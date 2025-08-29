@@ -7,12 +7,12 @@ import (
 )
 
 type Leave struct {
-	ID        uint      `gorm:"primaryKey"`
-	UserID    int    `gorm:"size:50;unique;not null"`
+	ID        uint64    `gorm:"primaryKey"`
+	UserID    uint64    `gorm:"not null"`
 	UserType  string    `gorm:"size:50;not null"`
 	Status    string    `gorm:"size:50;not null"`
-	Start     time.Time `gorm:"not null"` 
-	End       time.Time    `gorm:"not null"`
+	StartYear time.Time `gorm:"not null"`
+	EndYear   time.Time `gorm:"not null"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`

@@ -7,8 +7,8 @@ import (
 )
 
 type TeacherLesson struct {
-	ID         uint   `gorm:"primaryKey"`
-	TeacherID  int    `gorm:"not null"`
+	ID         uint64   `gorm:"primaryKey"`
+	TeacherID  uint64    `gorm:"not null"`
 	Lesson     string `gorm:"not null"`
 	SchoolYear string `gorm:"not null"`
 	CreatedAt  time.Time

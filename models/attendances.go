@@ -7,9 +7,9 @@ import (
 )
 
 type Attendance struct {
-	ID         uint      `gorm:"primaryKey"`
-	UserID     int       `gorm:"size:50;unique;not null"`
-	UserType   string    `gorm:"size:70;not null"`
+	ID         uint64      `gorm:"primaryKey"`
+	UserID     uint64       `gorm:"not null"`
+	UserType   string    `gorm:"size:100;not null"`
 	Type       string    `gorm:"size:50;not null"`
 	Date       time.Time `gorm:"not null"`
 	SchoolYear string    `gorm:"not null"`

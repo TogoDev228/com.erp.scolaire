@@ -8,7 +8,7 @@ import (
 
 type Payment struct {
 	ID        uint    `gorm:"primaryKey"`
-	StudentID uint    `gorm:"not null"`             // Clé étrangère vers Student
+	StudentID uint64    `gorm:"not null"`             // Clé étrangère vers Student
 	Student   Student `gorm:"foreignKey:StudentID"` // Relation GORM
 	Price     float64 `gorm:"not null"`             // Montant payé
 	Type      string  `gorm:"size:50;not null"`     // Ex: "Inscription", "Mensualité"

@@ -7,8 +7,8 @@ import (
 )
 
 type Remuneration struct {
-	ID        uint    `gorm:"primaryKey"`
-	UserID    uint    `gorm:"not null"`
+	ID        uint64    `gorm:"primaryKey"`
+	UserID    uint64    `gorm:"not null"`
 	UserType  string  `gorm:"size:50;not null"`
 	Price     float64 `gorm:"not null"`
 	Type      string  `gorm:"size:50;not null"`

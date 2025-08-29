@@ -7,9 +7,10 @@ import (
 )
 
 type StudentClass struct {
-	ID         uint   `gorm:"primaryKey"`
-	StudentID  int    `gorm:"not null"`
+	ID         uint64   `gorm:"primaryKey"`
+	StudentID  uint64    `gorm:"not null"`
 	Class      string `gorm:"not null"`
+	Reason      string `gorm:"not null"`
 	SchoolYear string `gorm:"not null"`
 	CreatedAt  time.Time
 	UpdatedAt  time.Time

@@ -17,12 +17,12 @@ type TransactionHistory struct {
 }
 
 // CreateHistory ajoute une entrée dans l’historique
-func CreateHistory(db *gorm.DB, transactionHistory *TransactionHistory) error {
+func CreateTransactionHistory(db *gorm.DB, transactionHistory *TransactionHistory) error {
 	return db.Create(transactionHistory).Error
 }
 
 // GetHistoryByID récupère une entrée de l’historique par ID
-func GetHistoryByID(db *gorm.DB, id uint) (*TransactionHistory, error) {
+func GetTransactionHistoryByID(db *gorm.DB, id uint) (*TransactionHistory, error) {
 	var transactionHistory TransactionHistory
 	err := db.First(&transactionHistory, id).Error
 	if err != nil {
@@ -32,24 +32,24 @@ func GetHistoryByID(db *gorm.DB, id uint) (*TransactionHistory, error) {
 }
 
 // ListHistories retourne toutes les entrées de l’historique
-func ListHistories(db *gorm.DB) ([]TransactionHistory, error) {
+func ListTransactionHistories(db *gorm.DB) ([]TransactionHistory, error) {
 	var transactionHistories []TransactionHistory
 	err := db.Order("created_at DESC").Find(&transactionHistories).Error
 	return transactionHistories, err
 }
 
 // UpdateHistory met à jour une entrée
-func UpdateHistory(db *gorm.DB, transactionHistory *TransactionHistory) error {
+func UpdateTransactionHistory(db *gorm.DB, transactionHistory *TransactionHistory) error {
 	return db.Save(transactionHistory).Error
 }
 
 // DeleteHistory supprime une entrée (soft delete)
-func DeleteHistory(db *gorm.DB, id uint) error {
+func DeleteTransactionHistory(db *gorm.DB, id uint) error {
 	return db.Delete(&TransactionHistory{}, id).Error
 }
 
 // Nombre de transaction existant dans la database
-func CountHistory(db *gorm.DB) (int64, error) {
+func CountTransactionHistory(db *gorm.DB) (int64, error) {
 	var count int64
 	err := db.Model(&TransactionHistory{}).Count(&count).Error
 	return count, err

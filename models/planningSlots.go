@@ -7,15 +7,15 @@ import (
 )
 
 type PlanningSlot struct {
-	ID         uint      `gorm:"primaryKey"`
-	PlaningID  int       `gorm:"not null"`
-	Lesson     string    `gorm:"size:150;not null"`
-	Teacher    string    `gorm:"size:150;not null"`
-	StartHours time.Time `gorm:"not null"`
-	EndHours   time.Time `gorm:"not null"`
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	DeletedAt  gorm.DeletedAt `gorm:"index"`
+	ID        uint64    `gorm:"primaryKey"`
+	PlaningID uint64    `gorm:"not null"`
+	Lesson    string    `gorm:"size:150;not null"`
+	Teacher   string    `gorm:"size:150;not null"`
+	StartHour time.Time `gorm:"type:time;not null"`
+	EndHour   time.Time `gorm:"type:time;not null"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 // Ajoute un nouvau conger pour un utilisateur donnée
