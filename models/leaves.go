@@ -24,7 +24,7 @@ func CreateLeave(db *gorm.DB, leave *Leave) error {
 }
 
 // Récupère un conger via son ID
-func GetLeaveByID(db *gorm.DB, id uint) (*Leave, error) {
+func GetLeaveByID(db *gorm.DB, id uint64) (*Leave, error) {
 	var leave Leave
 	err := db.First(&leave, id).Error
 	if err != nil {
@@ -39,7 +39,7 @@ func UpdateLeave(db *gorm.DB, leave *Leave) error {
 }
 
 // Supprime un conger (soft delete si activé)
-func DeleteLeave(db *gorm.DB, id uint) error {
+func DeleteLeave(db *gorm.DB, id uint64) error {
 	return db.Delete(&Leave{}, id).Error
 }
 

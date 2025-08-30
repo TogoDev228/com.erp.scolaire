@@ -7,14 +7,14 @@ import (
 )
 
 type Synchronization struct {
-	ID        uint   `gorm:"primaryKey"`
-	Type     string `gorm:"not null"`
-	Status     string `gorm:"size:50;not null"`
-	Start     time.Time `gorm:"not null"`
-	End     time.Time `gorm:"not null"`
-	AttemptCount     int `gorm:"default:0"`
-	CreatedAt time.Time
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	ID           uint64    `gorm:"primaryKey"`
+	Type         string    `gorm:"not null"`
+	Status       string    `gorm:"size:50;not null"`
+	Start        time.Time `gorm:"not null"`
+	End          time.Time `gorm:"not null"`
+	AttemptCount int       `gorm:"default:0"`
+	CreatedAt    time.Time
+	DeletedAt    gorm.DeletedAt `gorm:"index"`
 }
 
 // CreateClass ajoute une nouvelle classe
@@ -23,7 +23,7 @@ func CreateSynchronization(db *gorm.DB, synchronization *Synchronization) error 
 }
 
 // GetClassByID récupère une classe par ID
-func GetSynchronizationByID(db *gorm.DB, id uint) (*Synchronization, error) {
+func GetSynchronizationByID(db *gorm.DB, id uint64) (*Synchronization, error) {
 	var synchronization Synchronization
 	err := db.First(&synchronization, id).Error
 	if err != nil {
@@ -40,7 +40,7 @@ func ListSynchronizations(db *gorm.DB) ([]Synchronization, error) {
 }
 
 // DeleteClass supprime une classe (soft delete)
-func DeleteSynchronization(db *gorm.DB, id uint) error {
+func DeleteSynchronization(db *gorm.DB, id uint64) error {
 	return db.Delete(&Synchronization{}, id).Error
 }
 

@@ -25,7 +25,7 @@ func CreateExam(db *gorm.DB, exam *Exam) error {
 }
 
 // Récupère un examen par son ID
-func GetExamByID(db *gorm.DB, id uint) (*Exam, error) {
+func GetExamByID(db *gorm.DB, id uint64) (*Exam, error) {
 	var exam Exam
 	err := db.First(&exam, id).Error
 	if err != nil {
@@ -40,7 +40,7 @@ func UpdateExam(db *gorm.DB, exam *Exam) error {
 }
 
 // Supprime un examen
-func DeleteExam(db *gorm.DB, id uint) error {
+func DeleteExam(db *gorm.DB, id uint64) error {
 	return db.Delete(&Exam{}, id).Error
 }
 

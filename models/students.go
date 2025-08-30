@@ -7,7 +7,7 @@ import (
 )
 
 type Student struct {
-	ID              uint      `gorm:"primaryKey"`
+	ID              uint64    `gorm:"primaryKey"`
 	Matricul        string    `gorm:"size:50;unique;not null"` // Numéro matricule unique
 	FirstName       string    `gorm:"size:100;not null"`
 	LastName        string    `gorm:"size:100;not null"`
@@ -32,7 +32,7 @@ func CreateStudent(db *gorm.DB, student *Student) error {
 }
 
 // GetStudentByID récupère un étudiant via son ID
-func GetStudentByID(db *gorm.DB, id uint) (*Student, error) {
+func GetStudentByID(db *gorm.DB, id uint64) (*Student, error) {
 	var student Student
 	err := db.First(&student, id).Error
 	if err != nil {
@@ -47,7 +47,7 @@ func UpdateStudent(db *gorm.DB, student *Student) error {
 }
 
 // DeleteStudent supprime un étudiant (soft delete si activé)
-func DeleteStudent(db *gorm.DB, id uint) error {
+func DeleteStudent(db *gorm.DB, id uint64) error {
 	return db.Delete(&Student{}, id).Error
 }
 

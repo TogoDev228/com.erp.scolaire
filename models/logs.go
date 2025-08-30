@@ -7,7 +7,7 @@ import (
 )
 
 type Log struct {
-	ID        uint   `gorm:"primaryKey"`
+	ID        uint64   `gorm:"primaryKey"`
 	Type      string `gorm:"size:50;not null"`   // Ex: "INFO", "ERROR", "LOGIN", etc.
 	Message   string `gorm:"type:text;not null"` // Contenu du log
 	UserID    uint   `gorm:"not null"`           // FK vers l'utilisateur concerné

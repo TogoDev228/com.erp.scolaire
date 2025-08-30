@@ -7,7 +7,7 @@ import (
 )
 
 type Parent struct {
-	ID        uint      `gorm:"primaryKey"`
+	ID        uint64      `gorm:"primaryKey"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
 	Sexe      string    `gorm:"size:10"`  // "M" ou "F"
@@ -26,7 +26,7 @@ func CreateParent(db *gorm.DB, parent *Parent) error {
 	return db.Create(parent).Error
 }
 
-func GetParentByID(db *gorm.DB, id uint) (*Parent, error) {
+func GetParentByID(db *gorm.DB, id uint64) (*Parent, error) {
 	var parent Parent
 	err := db.First(&parent, id).Error
 	if err != nil {
@@ -45,7 +45,7 @@ func UpdateParent(db *gorm.DB, parent *Parent) error {
 	return db.Save(parent).Error
 }
 
-func DeleteParent(db *gorm.DB, id uint) error {
+func DeleteParent(db *gorm.DB, id uint64) error {
 	return db.Delete(&Parent{}, id).Error
 }
 

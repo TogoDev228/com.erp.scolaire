@@ -7,7 +7,7 @@ import (
 )
 
 type TransactionHistory struct {
-	ID        uint    `gorm:"primaryKey"`
+	ID        uint64    `gorm:"primaryKey"`
 	Title     string  `gorm:"size:200;not null"` // Intitulé de l’opération ou événement
 	Price     float64 `gorm:"not null"`          // Montant associé (facultatif selon le contexte)
 	Type      string  `gorm:"size:50"`           // Ex: "Paiement", "Achat", "Réparation"
@@ -22,7 +22,7 @@ func CreateTransactionHistory(db *gorm.DB, transactionHistory *TransactionHistor
 }
 
 // GetHistoryByID récupère une entrée de l’historique par ID
-func GetTransactionHistoryByID(db *gorm.DB, id uint) (*TransactionHistory, error) {
+func GetTransactionHistoryByID(db *gorm.DB, id uint64) (*TransactionHistory, error) {
 	var transactionHistory TransactionHistory
 	err := db.First(&transactionHistory, id).Error
 	if err != nil {
@@ -38,13 +38,8 @@ func ListTransactionHistories(db *gorm.DB) ([]TransactionHistory, error) {
 	return transactionHistories, err
 }
 
-// UpdateHistory met à jour une entrée
-func UpdateTransactionHistory(db *gorm.DB, transactionHistory *TransactionHistory) error {
-	return db.Save(transactionHistory).Error
-}
-
 // DeleteHistory supprime une entrée (soft delete)
-func DeleteTransactionHistory(db *gorm.DB, id uint) error {
+func DeleteTransactionHistory(db *gorm.DB, id uint64) error {
 	return db.Delete(&TransactionHistory{}, id).Error
 }
 

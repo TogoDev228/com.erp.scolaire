@@ -24,7 +24,7 @@ func CreatePlanningSlot(db *gorm.DB, planningSlot *PlanningSlot) error {
 }
 
 // Récupère un conger via son ID
-func GetPlanningSlotByID(db *gorm.DB, id uint) (*PlanningSlot, error) {
+func GetPlanningSlotByID(db *gorm.DB, id uint64) (*PlanningSlot, error) {
 	var planningSlot PlanningSlot
 	err := db.First(&planningSlot, id).Error
 	if err != nil {
@@ -39,7 +39,7 @@ func UpdatePlanningSlot(db *gorm.DB, planningSlot *PlanningSlot) error {
 }
 
 // Supprime un conger (soft delete si activé)
-func DeletePlanningSlot(db *gorm.DB, id uint) error {
+func DeletePlanningSlot(db *gorm.DB, id uint64) error {
 	return db.Delete(&PlanningSlot{}, id).Error
 }
 

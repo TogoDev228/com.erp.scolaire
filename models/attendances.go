@@ -24,7 +24,7 @@ func CreateAttendance(db *gorm.DB, attendance *Attendance) error {
 }
 
 // Récupère un conger via son ID
-func GetAttendanceByID(db *gorm.DB, id uint) (*Attendance, error) {
+func GetAttendanceByID(db *gorm.DB, id uint64) (*Attendance, error) {
 	var attendance Attendance
 	err := db.First(&attendance, id).Error
 	if err != nil {
@@ -39,7 +39,7 @@ func UpdateAttendance(db *gorm.DB, attendance *Attendance) error {
 }
 
 // Supprime un conger (soft delete si activé)
-func DeleteAttendance(db *gorm.DB, id uint) error {
+func DeleteAttendance(db *gorm.DB, id uint64) error {
 	return db.Delete(&Attendance{}, id).Error
 }
 

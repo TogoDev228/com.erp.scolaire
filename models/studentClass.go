@@ -23,7 +23,7 @@ func CreateStudentClass(db *gorm.DB, studentClass *StudentClass) error {
 }
 
 // Récupère une relation entre un élève et une classe
-func GetStudentClassByID(db *gorm.DB, id uint) (*StudentClass, error) {
+func GetStudentClassByID(db *gorm.DB, id uint64) (*StudentClass, error) {
 	var studentClass StudentClass
 	err := db.First(&studentClass, id).Error
 	if err != nil {
@@ -38,7 +38,7 @@ func UpdateStudentClass(db *gorm.DB, studentClass *StudentClass) error {
 }
 
 // Supprime une relation entre un élève et une classe
-func DeleteStudentClass(db *gorm.DB, id uint) error {
+func DeleteStudentClass(db *gorm.DB, id uint64) error {
 	return db.Delete(&StudentClass{}, id).Error
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 type Planning struct {
-	ID         uint      `gorm:"primaryKey"`
+	ID         uint64      `gorm:"primaryKey"`
 	Title      string       `gorm:"size:120;unique;not null"`
 	Type       string    `gorm:"size:70;not null"`
 	Class      string    `gorm:"size:100;not null"`
@@ -25,7 +25,7 @@ func CreatePlanning(db *gorm.DB, planning *Planning) error {
 }
 
 // Récupère un conger via son ID
-func GetPlanningByID(db *gorm.DB, id uint) (*Planning, error) {
+func GetPlanningByID(db *gorm.DB, id uint64) (*Planning, error) {
 	var planning Planning
 	err := db.First(&planning, id).Error
 	if err != nil {
@@ -40,7 +40,7 @@ func UpdatePlanning(db *gorm.DB, planning *Planning) error {
 }
 
 // Supprime un conger (soft delete si activé)
-func DeletePlanning(db *gorm.DB, id uint) error {
+func DeletePlanning(db *gorm.DB, id uint64) error {
 	return db.Delete(&Planning{}, id).Error
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 type Staff struct {
-	ID        uint      `gorm:"primaryKey"`
+	ID        uint64      `gorm:"primaryKey"`
 	Matricul  string    `gorm:"size:50;unique;not null"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
@@ -29,7 +29,7 @@ func CreateStaff(db *gorm.DB, staff *Staff) error {
 }
 
 // GetStaffByID récupère un staff par ID
-func GetStaffByID(db *gorm.DB, id uint) (*Staff, error) {
+func GetStaffByID(db *gorm.DB, id uint64) (*Staff, error) {
 	var staff Staff
 	err := db.First(&staff, id).Error
 	if err != nil {
@@ -54,7 +54,7 @@ func UpdateStaff(db *gorm.DB, staff *Staff) error {
 }
 
 // DeleteStaff supprime un membre du personnel (soft delete)
-func DeleteStaff(db *gorm.DB, id uint) error {
+func DeleteStaff(db *gorm.DB, id uint64) error {
 	return db.Delete(&Staff{}, id).Error
 }
 

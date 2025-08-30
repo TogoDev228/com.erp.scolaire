@@ -7,7 +7,7 @@ import (
 )
 
 type Expense struct {
-	ID          uint   `gorm:"primaryKey"`
+	ID          uint64   `gorm:"primaryKey"`
 	Title       string `gorm:"not null"`
 	Description string `gorm:"type:text"`
 	Type        string `gorm:"not null"`
@@ -27,7 +27,7 @@ func CreateExpense(db *gorm.DB, expense *Expense) error {
 }
 
 // GetPaymentByID récupère un paiement par ID
-func GetExpenseByID(db *gorm.DB, id uint) (*Expense, error) {
+func GetExpenseByID(db *gorm.DB, id uint64) (*Expense, error) {
 	var expense Expense
 	err := db.First(&expense, id).Error
 	if err != nil {
@@ -49,6 +49,6 @@ func UpdateExpense(db *gorm.DB, expense *Expense) error {
 }
 
 // DeletePayment supprime un paiement (soft delete)
-func DeleteExpense(db *gorm.DB, id uint) error {
+func DeleteExpense(db *gorm.DB, id uint64) error {
 	return db.Delete(&Expense{}, id).Error
 }

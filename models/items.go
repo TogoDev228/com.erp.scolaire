@@ -7,7 +7,7 @@ import (
 )
 
 type Item struct {
-	ID          uint       `gorm:"primaryKey"`
+	ID          uint64       `gorm:"primaryKey"`
 	Title       string     `gorm:"size:100;not null"` 
 	Description string     `gorm:"type:text"`        
 	Type        string     `gorm:"size:50;not null"`
@@ -27,7 +27,7 @@ func CreateItem(db *gorm.DB, item *Item) error {
 }
 
 // GetItemByID récupère un item par ID
-func GetItemByID(db *gorm.DB, id uint) (*Item, error) {
+func GetItemByID(db *gorm.DB, id uint64) (*Item, error) {
 	var item Item
 	err := db.First(&item, id).Error
 	if err != nil {
@@ -56,7 +56,7 @@ func UpdateItem(db *gorm.DB, item *Item) error {
 }
 
 // DeleteItem supprime un item (soft delete)
-func DeleteItem(db *gorm.DB, id uint) error {
+func DeleteItem(db *gorm.DB, id uint64) error {
 	return db.Delete(&Item{}, id).Error
 }
 

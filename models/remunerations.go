@@ -24,7 +24,7 @@ func CreateRemuneration(db *gorm.DB, remuneration *Remuneration) error {
 }
 
 // Récupère un paiement par ID
-func GetRemunerationByID(db *gorm.DB, id uint) (*Remuneration, error) {
+func GetRemunerationByID(db *gorm.DB, id uint64) (*Remuneration, error) {
 	var remuneration Remuneration
 	err := db.First(&remuneration, id).Error
 	if err != nil {
@@ -46,6 +46,6 @@ func UpdateRemuneration(db *gorm.DB, remuneration *Remuneration) error {
 }
 
 // Supprime un paiement (soft delete)
-func DeleteRemuneration(db *gorm.DB, id uint) error {
+func DeleteRemuneration(db *gorm.DB, id uint64) error {
 	return db.Delete(&Remuneration{}, id).Error
 }

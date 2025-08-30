@@ -7,7 +7,7 @@ import (
 )
 
 type Payment struct {
-	ID        uint    `gorm:"primaryKey"`
+	ID        uint64    `gorm:"primaryKey"`
 	StudentID uint64    `gorm:"not null"`             // Clé étrangère vers Student
 	Student   Student `gorm:"foreignKey:StudentID"` // Relation GORM
 	Price     float64 `gorm:"not null"`             // Montant payé
@@ -23,7 +23,7 @@ func CreatePayment(db *gorm.DB, payment *Payment) error {
 }
 
 // GetPaymentByID récupère un paiement par ID
-func GetPaymentByID(db *gorm.DB, id uint) (*Payment, error) {
+func GetPaymentByID(db *gorm.DB, id uint64) (*Payment, error) {
 	var payment Payment
 	err := db.Preload("Student").First(&payment, id).Error
 	if err != nil {
@@ -45,6 +45,6 @@ func UpdatePayment(db *gorm.DB, payment *Payment) error {
 }
 
 // DeletePayment supprime un paiement (soft delete)
-func DeletePayment(db *gorm.DB, id uint) error {
+func DeletePayment(db *gorm.DB, id uint64) error {
 	return db.Delete(&Payment{}, id).Error
 }

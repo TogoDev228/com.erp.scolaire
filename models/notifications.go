@@ -7,7 +7,7 @@ import (
 )
 
 type Notification struct {
-	ID          uint   `gorm:"primaryKey"`
+	ID          uint64   `gorm:"primaryKey"`
 	Title       string `gorm:"size:100;not null;unique"`
 	Description string `gorm:"size:100;not null;unique"`
 	Status      string `gorm:"size:100;not null;unique"`
@@ -21,7 +21,7 @@ func CreateNotification(db *gorm.DB, notification *Notification) error {
 }
 
 // Récupère une notification par ID
-func GetNotificationByID(db *gorm.DB, id uint) (*Notification, error) {
+func GetNotificationByID(db *gorm.DB, id uint64) (*Notification, error) {
 	var notification Notification
 	err := db.First(&notification, id).Error
 	if err != nil {
@@ -38,7 +38,7 @@ func ListNotification(db *gorm.DB) ([]Notification, error) {
 }
 
 // Supprime une notification (soft delete)
-func DeleteNotification(db *gorm.DB, id uint) error {
+func DeleteNotification(db *gorm.DB, id uint64) error {
 	return db.Delete(&Notification{}, id).Error
 }
 

@@ -7,8 +7,8 @@ import (
 )
 
 type TeacherLesson struct {
-	ID         uint64   `gorm:"primaryKey"`
-	TeacherID  uint64    `gorm:"not null"`
+	ID         uint64 `gorm:"primaryKey"`
+	TeacherID  uint64 `gorm:"not null"`
 	Lesson     string `gorm:"not null"`
 	SchoolYear string `gorm:"not null"`
 	CreatedAt  time.Time
@@ -22,7 +22,7 @@ func CreateTeacherLesson(db *gorm.DB, teacherLesson *TeacherLesson) error {
 }
 
 // Récupère une relation entre un professeur et une lesson
-func GetTeacherLessonByID(db *gorm.DB, id uint) (*TeacherLesson, error) {
+func GetTeacherLessonByID(db *gorm.DB, id uint64) (*TeacherLesson, error) {
 	var teacherLesson TeacherLesson
 	err := db.First(&teacherLesson, id).Error
 	if err != nil {
@@ -37,7 +37,7 @@ func UpdateTeacherLesson(db *gorm.DB, teacherLesson *TeacherLesson) error {
 }
 
 // Supprime une relation entre un professeur et une lesson
-func DeleteTeacherLesson(db *gorm.DB, id uint) error {
+func DeleteTeacherLesson(db *gorm.DB, id uint64) error {
 	return db.Delete(&TeacherLesson{}, id).Error
 }
 

@@ -7,7 +7,7 @@ import (
 )
 
 type SchoolYear struct {
-	ID        uint      `gorm:"primaryKey"`
+	ID        uint64      `gorm:"primaryKey"`
 	Title     string    `gorm:"size:20;unique;not null"`
 	StartYear time.Time `gorm:"not null"`
 	EndYear   time.Time `gorm:"not null"`
@@ -22,7 +22,7 @@ func CreateSchoolYear(db *gorm.DB, schoolYear *SchoolYear) error {
 }
 
 // Récupère une année par son ID
-func GetSchoolYearByID(db *gorm.DB, id uint) (*SchoolYear, error) {
+func GetSchoolYearByID(db *gorm.DB, id uint64) (*SchoolYear, error) {
 	var schoolYear SchoolYear
 	err := db.First(&schoolYear, id).Error
 	if err != nil {
@@ -37,7 +37,7 @@ func UpdateSchoolYear(db *gorm.DB, schoolYear *SchoolYear) error {
 }
 
 // Supprime une année scolaire (soft delete si DeletedAt est activé)
-func DeleteSchoolYear(db *gorm.DB, id uint) error {
+func DeleteSchoolYear(db *gorm.DB, id uint64) error {
 	return db.Delete(&SchoolYear{}, id).Error
 }
 

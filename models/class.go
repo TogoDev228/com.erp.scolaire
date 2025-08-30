@@ -7,7 +7,7 @@ import (
 )
 
 type Class struct {
-	ID        uint   `gorm:"primaryKey"`
+	ID        uint64   `gorm:"primaryKey"`
 	Title     string `gorm:"size:100;not null;unique"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -20,7 +20,7 @@ func CreateClass(db *gorm.DB, class *Class) error {
 }
 
 // GetClassByID récupère une classe par ID
-func GetClassByID(db *gorm.DB, id uint) (*Class, error) {
+func GetClassByID(db *gorm.DB, id uint64) (*Class, error) {
 	var class Class
 	err := db.First(&class, id).Error
 	if err != nil {
@@ -42,7 +42,7 @@ func UpdateClass(db *gorm.DB, class *Class) error {
 }
 
 // DeleteClass supprime une classe (soft delete)
-func DeleteClass(db *gorm.DB, id uint) error {
+func DeleteClass(db *gorm.DB, id uint64) error {
 	return db.Delete(&Class{}, id).Error
 }
 

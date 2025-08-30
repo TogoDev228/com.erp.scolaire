@@ -7,7 +7,7 @@ import (
 )
 
 type Prof struct {
-	ID        uint      `gorm:"primaryKey"`
+	ID        uint64      `gorm:"primaryKey"`
 	Matricul  string    `gorm:"size:50;unique;not null"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
@@ -28,7 +28,7 @@ func CreateProf(db *gorm.DB, prof *Prof) error {
 }
 
 // GetProfByID récupère un prof par ID
-func GetProfByID(db *gorm.DB, id uint) (*Prof, error) {
+func GetProfByID(db *gorm.DB, id uint64) (*Prof, error) {
 	var prof Prof
 	err := db.First(&prof, id).Error
 	if err != nil {
@@ -53,7 +53,7 @@ func UpdateProf(db *gorm.DB, prof *Prof) error {
 }
 
 // DeleteProf supprime un prof (soft delete)
-func DeleteProf(db *gorm.DB, id uint) error {
+func DeleteProf(db *gorm.DB, id uint64) error {
 	return db.Delete(&Prof{}, id).Error
 }
 

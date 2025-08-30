@@ -437,26 +437,6 @@ func DeleteStudentClass(c *gin.Context, db *gorm.DB) {
 	c.Redirect(http.StatusSeeOther, "/student-class-list")
 }
 
-func DeleteTransactionHistory(c *gin.Context, db *gorm.DB) {
-	id, err := getIDParam(c)
-	if err != nil {
-		c.String(http.StatusBadRequest, "ID invalide : %v", err)
-		return
-	}
-
-	if err := models.DeleteTransactionHistory(db, id); err != nil {
-		c.String(http.StatusInternalServerError, "Erreur : %v", err)
-		log := &models.Log{Type: "ERROR", Message: fmt.Sprintf("La transaction #%d n'a pas pu être supprimée", id)}
-		models.CreateLog(db, log)
-		return
-	}
-
-	log := &models.Log{Type: "DELETE", Message: fmt.Sprintf("La transaction #%d a été supprimée avec succès", id)}
-	models.CreateLog(db, log)
-
-	c.Redirect(http.StatusSeeOther, "/transaction-history-list")
-}
-
 func DeleteRemuneration(c *gin.Context, db *gorm.DB) {
 	id, err := getIDParam(c)
 	if err != nil {
@@ -497,11 +477,11 @@ func DeleteLeave(c *gin.Context, db *gorm.DB) {
 	c.Redirect(http.StatusSeeOther, "/leave-list")
 }
 
-func getIDParam(c *gin.Context) (uint, error) {
+func getIDParam(c *gin.Context) (uint64, error) {
 	idStr := c.Param("id")
-	idUint, err := strconv.ParseUint(idStr, 10, 32)
+	idUint, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
 		return 0, err
 	}
-	return uint(idUint), nil
+	return uint64(idUint), nil
 }

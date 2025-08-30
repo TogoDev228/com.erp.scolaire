@@ -26,7 +26,7 @@ func CreateRemediation(db *gorm.DB, remediation *Remediation) error {
 }
 
 // GetPaymentByID récupère un paiement par ID
-func GetRemediationByID(db *gorm.DB, id uint) (*Remediation, error) {
+func GetRemediationByID(db *gorm.DB, id uint64) (*Remediation, error) {
 	var remediation Remediation
 	err := db.First(&remediation, id).Error
 	if err != nil {
@@ -48,6 +48,6 @@ func UpdateRemediation(db *gorm.DB, remediation *Remediation) error {
 }
 
 // DeletePayment supprime un paiement (soft delete)
-func DeleteRemediation(db *gorm.DB, id uint) error {
+func DeleteRemediation(db *gorm.DB, id uint64) error {
 	return db.Delete(&Remediation{}, id).Error
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type Task struct {
-	ID          uint   `gorm:"primaryKey"`
+	ID          uint64 `gorm:"primaryKey"`
 	Title       string `gorm:"not null"`
 	Description string `gorm:"type:text"`
 	Type        string `gorm:"not null"`
@@ -27,7 +27,7 @@ func CreateTask(db *gorm.DB, task *Task) error {
 }
 
 // GetPaymentByID récupère un paiement par ID
-func GetTaskByID(db *gorm.DB, id uint) (*Task, error) {
+func GetTaskByID(db *gorm.DB, id uint64) (*Task, error) {
 	var task Task
 	err := db.First(&task, id).Error
 	if err != nil {
@@ -49,6 +49,6 @@ func UpdateTask(db *gorm.DB, task *Task) error {
 }
 
 // DeletePayment supprime un paiement (soft delete)
-func DeleteTask(db *gorm.DB, id uint) error {
+func DeleteTask(db *gorm.DB, id uint64) error {
 	return db.Delete(&Task{}, id).Error
 }

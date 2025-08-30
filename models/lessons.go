@@ -7,7 +7,7 @@ import (
 )
 
 type Lesson struct {
-	ID        uint   `gorm:"primaryKey"`
+	ID        uint64   `gorm:"primaryKey"`
 	Title     string `gorm:"size:100;not null;unique"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -20,7 +20,7 @@ func CreateLesson(db *gorm.DB, lesson *Lesson) error {
 }
 
 // GetLessonByID récupère une leçon par son ID
-func GetLessonByID(db *gorm.DB, id uint) (*Lesson, error) {
+func GetLessonByID(db *gorm.DB, id uint64) (*Lesson, error) {
 	var lesson Lesson
 	err := db.First(&lesson, id).Error
 	if err != nil {
@@ -49,7 +49,7 @@ func UpdateLesson(db *gorm.DB, lesson *Lesson) error {
 }
 
 // DeleteLesson supprime une leçon (soft delete)
-func DeleteLesson(db *gorm.DB, id uint) error {
+func DeleteLesson(db *gorm.DB, id uint64) error {
 	return db.Delete(&Lesson{}, id).Error
 }
 
