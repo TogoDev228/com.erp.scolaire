@@ -88,3 +88,15 @@ func ShowItemList(c *gin.Context, db *gorm.DB) {
 		"item": item,
 	})
 }
+
+func ShowSettingSchoolYearList(c *gin.Context, db *gorm.DB) {
+	schoolYear, err := models.ListSchoolYears(db)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "message, impossible de charger la liste des années scolaire.")
+		return
+	}
+
+	c.HTML(http.StatusOK, "setting-school-year.html", gin.H{
+		"schoolYear": schoolYear,
+	})
+}

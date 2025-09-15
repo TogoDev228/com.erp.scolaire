@@ -46,7 +46,7 @@ func main() {
 				if tt.IsZero() {
 					return "Aucune"
 				}
-				return tt.Format("2006-01-02")
+				return tt.Format("2006/01/02")
 			}
 
 			return "Aucune"
@@ -122,6 +122,10 @@ func main() {
 		controllers.ShowSettingLog(c, db)
 	})
 
+	auth.GET("/setting-school-year", func(c *gin.Context) {
+		controllers.ShowSettingSchoolYearList(c, db)
+	})
+
 	auth.GET("/setting-security", func(c *gin.Context) {
 		controllers.ShowSettingSecuriy(c, db)
 	})
@@ -141,6 +145,10 @@ func main() {
 
 	auth.POST("/setting-lesson", func(c *gin.Context) {
 		controllers.AddLesson(c, db)
+	})
+
+	auth.POST("/setting-school-year", func(c *gin.Context) {
+		controllers.AddSchoolYear(c, db)
 	})
 
 	auth.POST("/prof-list", func(c *gin.Context) {
@@ -168,6 +176,18 @@ func main() {
 	})
 
 	// PUT
+	auth.POST("/lesson/update/:id", func(c *gin.Context) {
+		controllers.UpdateLesson(c, db)
+	})
+
+	auth.POST("/class/update/:id", func(c *gin.Context) {
+		controllers.UpdateClass(c, db)
+	})
+
+	auth.POST("/school-year/update/:id", func(c *gin.Context) {
+		controllers.UpdateSchoolYear(c, db)
+	})
+
 	auth.POST("/prof/update/:id", func(c *gin.Context) {
 		controllers.UpdateProf(c, db)
 	})
@@ -193,6 +213,18 @@ func main() {
 	})
 
 	// DELETE
+	auth.POST("/class/delete/:id", func(c *gin.Context) {
+		controllers.DeleteClass(c, db)
+	})
+
+	auth.POST("/lesson/delete/:id", func(c *gin.Context) {
+		controllers.DeleteLesson(c, db)
+	})
+
+	auth.POST("/school-year/delete/:id", func(c *gin.Context) {
+		controllers.DeleteSchoolYear(c, db)
+	})
+
 	auth.POST("/prof/delete/:id", func(c *gin.Context) {
 		controllers.DeleteProf(c, db)
 	})

@@ -5,68 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <title>Parametre - Gestion des classes</title>
 </head>
-<body class="bg-gray-50">
+<body class="">
     <main class="flex">
-        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+        <div class="flex justify-center px-6 h-screen border-r border-gray-300 overflow-y-scroll" style="scrollbar-width: none;">
             <!-- Navbar -->
-            <ul class="py-9 space-y-6">
-                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/activity-list" class="text-cyan-600"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            <ul class="pt-8 pb-12 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/staff-list"><iconify-icon icon="mdi:account-multiple-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/setting-class" class="text-cyan-600"><iconify-icon icon="uil:setting" class="text-2xl"></iconify-icon></a></li>
             </ul>
         </div>
 
-        <div class="px-5 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
-            <div class="flex space-x-3">
-                <div class="bg-white border border-gray-300 w-1/5 rounded-lg pt-6 pb-14 px-2">
-                    <h1 class="text-center text-2xl font-semibold mb-8">Parametre</h1>
+        <div class="w-full">
+            <header class="px-10 py-6 border-b border-gray-300 flex justify-between items-center">
+                
+            </header>
 
-                    <div class="space-y-2">
-                        <a href="/setting-class" class="block rounded-md font-medium text-white bg-cyan-950 w-full ps-4 py-4">Gérer les classes</a>
-                        <a href="/setting-lesson" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Gérer les matières</a>
-                        <a href="/setting-log" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Logs</a>
-                        <a href="/setting-security" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Accès du compte</a>
-                        <a href="/setting-general" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Parametre généraux</a>
-                        <a href="/setting-notification" class="block rounded-md font-medium bg-gray-100 border border-gray-300 w-full ps-4 py-4">Notifications & alertes</a>
+            <main class="px-12 pt-12">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h1 class="font-medium text-2xl mb-1">Classes</h1>
+                        <p class="text-gray-800">Central Hub for Classes Customization</p>
                     </div>
                     
+                    <button type="button" data-modal-target="add-class-modal" data-modal-toggle="add-class-modal" class="rounded-sm px-6 py-2 text-sm hover:bg-cyan-600 bg-cyan-500 text-white">Nouvelle Classe</button>
                 </div>
+                
+                <div class="grid grid-cols-3 gap-7 mt-8">
+                    {{ range .class}}
+                    <div class="cols">
+                        <div class="bg-white border border-gray-300 rounded-xl p-6">
+                            <h2 class="font-medium text-lg mb-1">{{ .Title}}</h2>
+                            <p class="text-gray-700">Dernière modification: {{ .UpdatedAt | formatDate}}</p>
 
-                <div class="bg-white border border-gray-300 w-4/5 rounded-lg py-6 px-8">
-                    <h2 class="font-semibold text-2xl">Classe(s)</h2>
-
-                    <form action="/setting-class" method="post" class="flex my-5 space-x-1">
-                        <input type="text" name="title" placeholder="Libelle de la classe" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-lg py-2 ps-4" required>
-                        <button class="font-medium bg-cyan-900 hover:bg-cyan-900 rounded-md text-white py-2 px-10">Ajouter</button>
-                    </form>
-                   
-                    {{ if .class}}
-                    <div class="grid grid-cols-5 gap-2">
-                        {{ range .class}}
-                        <div class="border border-gray-300 bg-gray-50 rounded-sm">
-                            <h3 class="text-gray-800 font-medium text-center py-4">{{ .Title}}</h3>
+                            <div class="flex justify-end space-x-2 mt-6">
+                                <button data-modal-target="update-class-modal-{{.ID}}" data-modal-toggle="update-class-modal-{{.ID}}" class="border hover:bg-gray-50 hover:border-gray-200 border-gray-300 rounded-md px-6 py-1.5 text-sm text-gray-800">Modifier</button>
+                                <button data-modal-target="delete-class-modal-{{.ID}}" data-modal-toggle="delete-class-modal-{{.ID}}"  class="rounded-md px-6 py-1.5 text-sm hover:bg-red-600 bg-red-500 text-white">supprimer</button>
+                            </div>
                         </div>
-                        {{ end }}
                     </div>
-                    {{ else }}
-                    <p class="text-2xl text-center text-gray-800">Aucune classe disponible, veuillez en ajouté</p>
                     {{ end }}
-                </div>
-            </div>
-            
+
+                    <div class="cols">
+                        <div class="bg-white hover:bg-gray-50 border border-gray-300 rounded-xl p-6 flex justify-center items-center h-full" data-modal-target="add-class-modal" data-modal-toggle="add-class-modal">
+                            <iconify-icon icon="mynaui:add-queue" class="text-5xl text-gray-500"></iconify-icon>
+                        </div>
+                    </div>
+                </div> 
+            </main>
         </div>
     </main>
 
+
+
+
+    <!-- Add Class modal -->
+    <div id="add-class-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Static modal
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-class-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form action="/setting-class" method="post" class="">
+                    <div class="px-4 md:px-5 my-6">
+                        <input type="text" name="title" placeholder="Libelle de la classe" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
+                    </div>
+
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="add-class-modal" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="add-class-modal" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Update Class modal -->
+    {{ range .class}}
+    <div id="update-class-modal-{{ .ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Static modal
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="update-class-modal-{{ .ID}}">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <form action="/class/update/{{.ID}}" method="post" class="">
+                    <div class="px-4 md:px-5 my-6">
+                        <input type="text" name="title" value="{{ .Title}}" placeholder="Libelle de la classe" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
+                    </div>
+
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="update-class-modal-{{ .ID}}" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="update-class-modal-{{ .ID}}" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+    
+
+
+    <!-- Delete Class modal -->
+    {{ range .class}}
+    <div id="delete-class-modal-{{ .ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <form action="/class/delete/{{.ID}}" method="post" class="">
+                    <div class="px-4 md:px-5 my-6 pt-6">
+                        <div class="bg-red-50 w-fit px-4 pb-1.5 pt-3 rounded-md text-red-700 mb-3"><iconify-icon icon="ci:octagon-warning" class="text-3xl"></iconify-icon></div>
+                        <h2 class="text-gray-800 text-xl font-medium mb-2">Confirmer la suppression</h2>
+                        <p class="text-gray-800 text-lg">La classe <span class="font-semibold">{{ .Title}}</span> va être supprimé de manière définitive.</p>  
+                    </div>
+
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="delete-class-modal-{{ .ID}}" type="button" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
+                        <button data-modal-hide="delete-class-modal-{{ .ID}}" type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Supprimer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{ end }}
 </body>
 </html>
 

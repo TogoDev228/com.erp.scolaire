@@ -791,8 +791,8 @@ func AddPlanningSlot(c *gin.Context, db *gorm.DB) {
 func AddSchoolYear(c *gin.Context, db *gorm.DB) {
 
 	title := c.PostForm("title")
-	startStr := c.PostForm("title")
-	endStr := c.PostForm("title")
+	startStr := c.PostForm("startYear")
+	endStr := c.PostForm("endYear")
 
 	start, err := time.Parse("2006-01-02", startStr)
 	if err != nil {
@@ -812,7 +812,7 @@ func AddSchoolYear(c *gin.Context, db *gorm.DB) {
 	if err := models.CreateSchoolYear(db, schoolYear); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur : %v", err)
 
-		log := &models.Log{Type: "ERROR", Message: "L'année scolaire " + title + " du planning n'a pas pu être ajouter"}
+		log := &models.Log{Type: "ERROR", Message: "L'année scolaire " + title + " n'a pas pu être ajouter"}
 		if err := models.CreateLog(db, log); err != nil {
 			c.String(http.StatusInternalServerError, "Erreur : %v", err)
 			return
@@ -820,13 +820,13 @@ func AddSchoolYear(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
-	log := &models.Log{Type: "CREATE", Message: "L'année scolaire " + title + " du planning à était créée avec  succés"}
+	log := &models.Log{Type: "CREATE", Message: "L'année scolaire " + title + " à était créée avec  succés"}
 	if err := models.CreateLog(db, log); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur : %v", err)
 		return
 	}
 
-	c.Redirect(http.StatusSeeOther, "/school-year-list")
+	c.Redirect(http.StatusSeeOther, "/setting-school-year")
 }
 
 func AddNotification(c *gin.Context, db *gorm.DB) {

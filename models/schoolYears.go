@@ -44,6 +44,6 @@ func DeleteSchoolYear(db *gorm.DB, id uint64) error {
 // Liste toutes les années scolaires
 func ListSchoolYears(db *gorm.DB) ([]SchoolYear, error) {
 	var schoolYear []SchoolYear
-	err := db.Order("start DESC").Find(&schoolYear).Error
+	err := db.Find(&schoolYear).Error
 	return schoolYear, err
 }

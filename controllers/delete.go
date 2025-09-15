@@ -394,7 +394,7 @@ func DeleteSchoolYear(c *gin.Context, db *gorm.DB) {
 	log := &models.Log{Type: "DELETE", Message: fmt.Sprintf("L'année scolaire #%d a été supprimée avec succès", id)}
 	models.CreateLog(db, log)
 
-	c.Redirect(http.StatusSeeOther, "/school-year-list")
+	c.Redirect(http.StatusSeeOther, "/setting-school-year")
 }
 
 func DeleteNotification(c *gin.Context, db *gorm.DB) {

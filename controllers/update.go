@@ -12,8 +12,8 @@ import (
 )
 
 func UpdateClass(c *gin.Context, db *gorm.DB) {
-	idStr := c.Param("id") // On récupère l'ID dans l'URL, ex: /class/update/:id
-	id, err := strconv.Atoi(idStr)
+	id, err := getIDParam(c)
+	
 	if err != nil {
 		c.String(http.StatusBadRequest, "ID invalide : %v", err)
 		return
@@ -865,8 +865,8 @@ func UpdateSchoolYear(c *gin.Context, db *gorm.DB) {
 	}
 
 	title := c.PostForm("title")
-	startStr := c.PostForm("start_year")
-	endStr := c.PostForm("end_year")
+	startStr := c.PostForm("startYear")
+	endStr := c.PostForm("endYear")
 
 	start, err := time.Parse("2006-01-02", startStr)
 	if err != nil {
@@ -893,7 +893,7 @@ func UpdateSchoolYear(c *gin.Context, db *gorm.DB) {
 	log := &models.Log{Type: "UPDATE", Message: "L'année scolaire a été mise à jour avec succès"}
 	models.CreateLog(db, log)
 
-	c.Redirect(http.StatusSeeOther, "/school-year-list")
+	c.Redirect(http.StatusSeeOther, "/setting-school-year")
 }
 
 func UpdateStudentClass(c *gin.Context, db *gorm.DB) {
