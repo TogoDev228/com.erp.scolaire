@@ -589,7 +589,7 @@ func UpdateRole(c *gin.Context, db *gorm.DB) {
 	}
 
 	models.CreateLog(db, &models.Log{Type: "UPDATE", Message: "Le rôle " + title + " a été mis à jour avec succès"})
-	c.Redirect(http.StatusSeeOther, "/role-list")
+	c.Redirect(http.StatusSeeOther, "/setting-role")
 }
 
 func UpdateExpense(c *gin.Context, db *gorm.DB) {
@@ -876,6 +876,11 @@ func UpdateSchoolYear(c *gin.Context, db *gorm.DB) {
 	end, err := time.Parse("2006-01-02", endStr)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Date de fin invalide : %v", err)
+		return
+	}
+
+	if start.After(end) {
+		c.String(http.StatusBadRequest, "Date de debut ne peut être supèrieur à celui de la fin")
 		return
 	}
 

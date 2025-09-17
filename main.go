@@ -32,6 +32,7 @@ func main() {
 		&models.Activity{},
 		&models.Item{},
 		&models.SchoolYear{},
+		&models.Role{},
 	)
 
 	r := gin.Default()
@@ -126,6 +127,10 @@ func main() {
 		controllers.ShowSettingSchoolYearList(c, db)
 	})
 
+	auth.GET("/setting-role", func(c *gin.Context) {
+		controllers.ShowSettingRoleList(c, db)
+	})
+
 	auth.GET("/setting-security", func(c *gin.Context) {
 		controllers.ShowSettingSecuriy(c, db)
 	})
@@ -149,6 +154,10 @@ func main() {
 
 	auth.POST("/setting-school-year", func(c *gin.Context) {
 		controllers.AddSchoolYear(c, db)
+	})
+
+	auth.POST("/setting-role", func(c *gin.Context) {
+		controllers.AddRole(c, db)
 	})
 
 	auth.POST("/prof-list", func(c *gin.Context) {
@@ -188,6 +197,10 @@ func main() {
 		controllers.UpdateSchoolYear(c, db)
 	})
 
+	auth.POST("/role/update/:id", func(c *gin.Context) {
+		controllers.UpdateRole(c, db)
+	})
+
 	auth.POST("/prof/update/:id", func(c *gin.Context) {
 		controllers.UpdateProf(c, db)
 	})
@@ -223,6 +236,10 @@ func main() {
 
 	auth.POST("/school-year/delete/:id", func(c *gin.Context) {
 		controllers.DeleteSchoolYear(c, db)
+	})
+
+	auth.POST("/role/delete/:id", func(c *gin.Context) {
+		controllers.DeleteRole(c, db)
 	})
 
 	auth.POST("/prof/delete/:id", func(c *gin.Context) {

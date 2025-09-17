@@ -233,7 +233,7 @@ func DeleteRole(c *gin.Context, db *gorm.DB) {
 	log := &models.Log{Type: "DELETE", Message: fmt.Sprintf("Le rôle #%d a été supprimé avec succès", id)}
 	models.CreateLog(db, log)
 
-	c.Redirect(http.StatusSeeOther, "/role-list")
+	c.Redirect(http.StatusSeeOther, "/setting-role")
 }
 
 func DeleteExpense(c *gin.Context, db *gorm.DB) {

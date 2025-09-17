@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <title>Parametre - Gestion des classes</title>
+    <title>Parametre - Gestion des Rôles</title>
 </head>
 <body class="">
     <main class="flex">
@@ -27,38 +27,38 @@
             </ul>
         </div>
 
-        <div class="w-full">
+        <div class="h-screen flex flex-col w-full">
             <header class="px-10 py-6 border-b border-gray-300 flex justify-between items-center">
                 
             </header>
 
-            <main class="px-12 pt-12">
+            <main class="flex-1 px-12 pt-12 pb-28 overflow-y-auto" style="scrollbar-width: none;">
                 <div class="flex justify-between items-end">
                     <div>
-                        <h1 class="font-medium text-2xl mb-1">Classes</h1>
-                        <p class="text-gray-800">Central Hub for Classes Customization</p>
+                        <h1 class="font-medium text-2xl mb-1">Rôle</h1>
+                        <p class="text-gray-800">Central Hub for Lessons Customization</p>
                     </div>
                     
-                    <button type="button" data-modal-target="add-class-modal" data-modal-toggle="add-class-modal" class="rounded-sm px-6 py-2 text-sm hover:bg-cyan-600 bg-cyan-500 text-white">Nouvelle Classe</button>
+                    <button type="button" data-modal-target="add-role-modal" data-modal-toggle="add-role-modal" class="rounded-sm px-6 py-2 text-sm hover:bg-cyan-600 bg-cyan-500 text-white">Nouveau Rôle</button>
                 </div>
                 
                 <div class="grid grid-cols-3 gap-7 mt-8">
-                    {{ range .class}}
+                    {{ range .role}}
                     <div class="cols">
                         <div class="bg-white border border-gray-300 rounded-xl p-6">
                             <h2 class="font-medium text-lg mb-1">{{ .Title}}</h2>
                             <p class="text-gray-700">Dernière modification: {{ .UpdatedAt | formatDate}}</p>
 
                             <div class="flex justify-end space-x-2 mt-6">
-                                <button data-modal-target="update-class-modal-{{.ID}}" data-modal-toggle="update-class-modal-{{.ID}}" class="border hover:bg-gray-50 hover:border-gray-200 border-gray-300 rounded-md px-6 py-1.5 text-sm text-gray-800">Modifier</button>
-                                <button data-modal-target="delete-class-modal-{{.ID}}" data-modal-toggle="delete-class-modal-{{.ID}}"  class="rounded-md px-6 py-1.5 text-sm hover:bg-red-600 bg-red-500 text-white">supprimer</button>
+                                <button data-modal-target="update-role-modal-{{.ID}}" data-modal-toggle="update-role-modal-{{.ID}}" class="border hover:bg-gray-50 hover:border-gray-200 border-gray-300 rounded-md px-6 py-1.5 text-sm text-gray-800">Modifier</button>
+                                <button data-modal-target="delete-role-modal-{{.ID}}" data-modal-toggle="delete-role-modal-{{.ID}}"  class="rounded-md px-6 py-1.5 text-sm hover:bg-red-600 bg-red-500 text-white">supprimer</button>
                             </div>
                         </div>
                     </div>
                     {{ end }}
 
                     <div class="cols">
-                        <div class="bg-white hover:bg-gray-50 border border-gray-300 rounded-xl p-6 flex justify-center items-center h-full" data-modal-target="add-class-modal" data-modal-toggle="add-class-modal">
+                        <div class="bg-white hover:bg-gray-50 border border-gray-300 rounded-xl p-6 flex justify-center items-center h-full" data-modal-target="add-role-modal" data-modal-toggle="add-role-modal">
                             <iconify-icon icon="mynaui:add-queue" class="text-5xl text-gray-500"></iconify-icon>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
 
 
 
-    <!-- Add Class modal -->
-    <div id="add-class-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <!-- Add Lesson modal -->
+    <div id="add-role-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -80,21 +80,21 @@
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Static modal
                     </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-class-modal">
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-role-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form action="/setting-class" method="post" class="">
+                <form action="/setting-role" method="post" class="">
                     <div class="px-4 md:px-5 my-6">
-                        <input type="text" name="title" placeholder="Libelle de la classe" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
+                        <input type="text" name="title" placeholder="Libelle du rôle" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
                     </div>
 
                     <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="add-class-modal" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
-                        <button data-modal-hide="add-class-modal" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
+                        <button data-modal-hide="add-role-modal" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="add-role-modal" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
                     </div>
                 </form>
             </div>
@@ -102,32 +102,30 @@
     </div>
 
 
-    <!-- Update Class modal -->
-    {{ range .class}}
-    <div id="update-class-modal-{{ .ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <!-- Update Lesson modal -->
+    {{ range .role}}
+    <div id="update-role-modal-{{.ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                <!-- Modal header -->
                 <div class="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 rounded-t">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Static modal
                     </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="update-class-modal-{{ .ID}}">
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="update-role-modal-{{.ID}}">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form action="/class/update/{{.ID}}" method="post" class="">
+                <form action="/role/update/{{.ID}}" method="post" class="">
                     <div class="px-4 md:px-5 my-6">
-                        <input type="text" name="title" value="{{ .Title}}" placeholder="Libelle de la classe" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
+                        <input type="text" name="title" value="{{ .Title}}" placeholder="Libelle du rôle" class="bg-gray-50 hover:outline-none focus:outline-none border border-gray-300 w-full rounded-md py-2 ps-4" required>
                     </div>
 
                     <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="update-class-modal-{{ .ID}}" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
-                        <button data-modal-hide="update-class-modal-{{ .ID}}" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
+                        <button data-modal-hide="update-role-modal-{{.ID}}" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="update-role-modal-{{.ID}}" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Modifier</button>
                     </div>
                 </form>
             </div>
@@ -137,22 +135,21 @@
     
 
 
-    <!-- Delete Class modal -->
-    {{ range .class}}
-    <div id="delete-class-modal-{{ .ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <!-- Delete Lesson modal -->
+    {{ range .role}}
+    <div id="delete-role-modal-{{ .ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                <form action="/class/delete/{{.ID}}" method="post" class="">
+                <form action="/role/delete/{{.ID}}" method="post" class="">
                     <div class="px-4 md:px-5 my-6 pt-6">
                         <div class="bg-red-50 w-fit px-4 pb-1.5 pt-3 rounded-md text-red-700 mb-3"><iconify-icon icon="ci:octagon-warning" class="text-3xl"></iconify-icon></div>
                         <h2 class="text-gray-800 text-xl font-medium mb-2">Confirmer la suppression</h2>
-                        <p class="text-gray-800 text-lg">La classe <span class="font-semibold">{{ .Title}}</span> va être supprimé de manière définitive.</p>  
+                        <p class="text-gray-800 text-lg">L'année scolaire <span class="font-semibold">{{.Title}}</span> va être supprimé de manière définitive.</p>  
                     </div>
 
                     <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
-                        <button data-modal-hide="delete-class-modal-{{ .ID}}" type="button" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
-                        <button data-modal-hide="delete-class-modal-{{ .ID}}" type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Supprimer</button>
+                        <button data-modal-hide="delete-role-modal-{{.ID}}" type="button" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
+                        <button data-modal-hide="delete-role-modal-{{.ID}}" type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Supprimer</button>
                     </div>
                 </form>
             </div>
@@ -161,4 +158,5 @@
     {{ end }}
 </body>
 </html>
+
 

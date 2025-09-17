@@ -100,3 +100,15 @@ func ShowSettingSchoolYearList(c *gin.Context, db *gorm.DB) {
 		"schoolYear": schoolYear,
 	})
 }
+
+func ShowSettingRoleList(c *gin.Context, db *gorm.DB) {
+	role, err := models.ListRoles(db)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "message, impossible de charger la liste des rôles.")
+		return
+	}
+
+	c.HTML(http.StatusOK, "setting-role.html", gin.H{
+		"role": role,
+	})
+}

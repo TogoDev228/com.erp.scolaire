@@ -454,7 +454,7 @@ func AddRole(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
-	c.Redirect(http.StatusSeeOther, "/role-list")
+	c.Redirect(http.StatusSeeOther, "/setting-role")
 }
 
 func AddExpense(c *gin.Context, db *gorm.DB) {
@@ -805,7 +805,12 @@ func AddSchoolYear(c *gin.Context, db *gorm.DB) {
 		c.String(http.StatusBadRequest, "Date de fin invalide : %v", err)
 		return
 	}
+
 	
+	if start.After(end) {
+		c.String(http.StatusBadRequest, "Date de debut ne peut pas être supérieure à la date de fin")
+		return
+	}
 
 	schoolYear := &models.SchoolYear{Title: title, StartYear: start, EndYear: end}
 
