@@ -3,106 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/popup.js" defer></script>
-    <!-- Tailwind & Iconify -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js" defer></script>
-    <!-- Flowbite JS  -->
-    <script src="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <title>Liste des employés</title>
 </head>
-<body class="bg-gray-50">
+<body class="">
     <main class="flex">
-        <div class="flex justify-center ps-5 h-screen overflow-y-scroll" style="scrollbar-width: none;">
+        <div class="flex justify-center px-6 h-screen border-r border-gray-300 overflow-y-scroll" style="scrollbar-width: none;">
             <!-- Navbar -->
-            <ul class="py-9 space-y-6">
-                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/staff-list" class="text-cyan-600"><iconify-icon icon="mdi:account-multiple-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-3xl"></iconify-icon></a></li>
-                <li><a href="/setting-class"><iconify-icon icon="uil:setting" class="text-3xl"></iconify-icon></a></li>
+            <ul class="pt-8 pb-12 space-y-6">
+                <li><a href="/dashboard-default"><iconify-icon icon="mdi:view-dashboard-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-item"><iconify-icon icon="mdi:clipboard-list-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-treasury"><iconify-icon icon="mdi:safe" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/dashboard-statistic"><iconify-icon icon="mdi:chart-bar" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/prof-list"><iconify-icon icon="mdi:account-tie-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/student-list"><iconify-icon icon="mdi:account-school-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/parent-list"><iconify-icon icon="mdi:account-group-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/staff-list" class="text-cyan-600"><iconify-icon icon="mdi:account-multiple-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/activity-list"><iconify-icon icon="mdi:calendar-check-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/item-list"><iconify-icon icon="mdi:folder-outline" class="text-2xl"></iconify-icon></a></li>
+                <li><a href="/setting-general"><iconify-icon icon="uil:setting" class="text-2xl"></iconify-icon></a></li>
             </ul>
         </div>
 
-        <div class="px-6 py-6 w-full h-screen overflow-y-scroll" style="scrollbar-width: none;">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
-                <h2 class="text-2xl">Employer Actif</h2>
-                <p class="text-2xl text-end mt-8">0</p>
-              </div>
-
-              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
-                <h2 class="text-2xl">Employer Inactif</h2>
-                <p class="text-2xl text-end mt-8">0</p>
-              </div>
-
-              <div class="bg-white border border-gray-300 h-30 px-4 pt-2">
-                <h2 class="text-2xl">Employer Total</h2>
-                <p class="text-2xl text-end mt-8">0</p>
-              </div>
-            </div>
-
-
-            <div class="my-5 space-x-3 mt-5">
-                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="AddModal()">Ajouter</button>
+        <div class="h-screen flex flex-col w-full">
+            <header class="px-10 py-6 border-b border-gray-300 flex justify-between items-center">
                 
-                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer" onclick="FilterModal()">Filtrer</button>
-                
-                <button class="bg-white border border-gray-300 font-medium text-gray-600 h-11 w-35 cursor-pointer">Exporter</button>
-            </div>
+            </header>
 
-           <div class="bg-white border border-gray-300 px-4 py-6">
-                {{if .staff}}
-                <div class="relative overflow-x-auto">
+            <main class="flex-1 px-12 pt-12 pb-28 overflow-y-auto" style="scrollbar-width: none;">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h1 class="font-medium text-2xl mb-1">Employer</h1>
+                        <p class="text-gray-800">Authorized Devices for Report Access</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="relative border border-gray-300 p-8 mt-8 rounded-xl">
+                    <div class="flex justify-between items-end mb-6">
+                        <button type="button" data-modal-target="add-staff-modal" data-modal-toggle="add-staff-modal" class="font-medium text-sm text-white bg-cyan-500 hover:bg-cyan-600 rounded-md py-2.5 px-4.5">Ajouter un Employer</button>
+                        
+                        <div class="space-x-0">
+                            <iconify-icon icon="mage:filter" class="text-2xl text-gray-700 hover:text-black"></iconify-icon>  
+                            <iconify-icon icon="qlementine-icons:menu-dots-16" class="text-2xl text-gray-700 hover:text-black"></iconify-icon>
+                        </div>
+                    </div>
+
+                    
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white font-thin uppercase bg-cyan-900">
+                        <thead class="text-xs text-white uppercase bg-cyan-500 dark:bg-cyan-800 dark:text-white">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Matricule
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Nom
+                                    Nom & Prénom
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Sexe
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Niveau d'étude
+                                    Fonction
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Poste
+                                    Téléphone
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Tel
+                                    Date d'entrée
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Date d'arrivé
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                   
+                                    
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{range .staff}}
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                            {{ range .staff}}
+                            <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-50">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ .Matricul}}
+                                    {{ .FirstName}} {{ .LastName}}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ .FirstName}} {{ .LastName}}
-                                </td>
-                                <td class="px-6 py-4">
                                     {{ .Sexe}}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ .Grade}}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ .Position}}
@@ -113,443 +93,284 @@
                                 <td class="px-6 py-4">
                                     {{ .Start | formatDate }}
                                 </td>
-                                <td class="px-6 py-4 space-x-1">
-                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-green-900" data-modal-target="update-modal-{{.ID}}" data-modal-toggle="update-modal-{{.ID}}" type="button">
-                                        <iconify-icon icon="fluent:pen-32-filled" width="20" height="20"></iconify-icon>
-                                    </button>
-                                    <button class="dropdown-trigger focus:outline-none font-medium text-lg py-2 inline-flex items-center hover:text-red-900" data-modal-target="delete-modal-{{.ID}}" data-modal-toggle="delete-modal-{{.ID}}" type="button">
-                                        <iconify-icon icon="material-symbols:delete-outline-rounded" width="20" height="20"></iconify-icon>
-                                    </button>
+                                <td class="px-6 py-4 space-x-1 flex">
+                                    <iconify-icon id="dropdown-button-{{.ID}}" data-dropdown-toggle="dropdown-{{.ID}}" icon="mdi:dots-horizontal" class="text-2xl text-gray-700 hover:text-black"></iconify-icon>
+                                
+                                    <div id="dropdown-{{.ID}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button-{{.ID}}">
+                                            <li>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-cyan-700">Détails</a>
+                                            </li>
+                                            <li>
+                                                <a data-modal-target="update-staff-modal-{{.ID}}" data-modal-toggle="update-staff-modal-{{.ID}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-cyan-700">Modifier</a>
+                                            </li>
+                                            <li>
+                                                <a data-modal-target="delete-staff-modal-{{.ID}}" data-modal-toggle="delete-staff-modal-{{.ID}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 hover:text-red-700">Supprimer</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
-                            {{end}}
+                            {{ end }}
                         </tbody>
                     </table>
+                
                 </div>
-                {{ else }}
-                <p class="text-2xl text-gray-800 text-center">Aucun employé éxistant, veuillez en ajouté</p>
-                {{ end }}
-           </div>
+            </main>
         </div>
     </main>
 
 
-    <!-- Modal d'ajout des staffs -->
-    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="add">
-        <form action="/staff-list" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Ajouter un(e) employé(e)</h2>
-            </div>
-
-            <!-- Body -->
-            <div class="mb-6 space-y-4">
-                <div class="">
-                    <label for="">Matricule</label>
-                    <input type="text" name="matricul" placeholder="Matricule de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                </div>
-               
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Nom</label>
-                        <input type="text" name="firstName" placeholder="Nom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                    </div>
-                
-                    <div class="w-1/2">
-                        <label for="">Prenom</label>
-                        <input type="text" name="lastName" placeholder="Prenom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                    </div>
-                </div>
-
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Poste</label>
-                        <select name="position" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                            <option selected disabled>Veuillez choisir le poste de l'employé</option>
-                            <option value="Secrétaire">Secrétaire</option>
-                            <option value="Comptable">Comptable </option>
-                            <option value="Gardien">Gardien</option>
-                            <option value="RH">RH</option>
-                            <option value="Directeur Générale">Directeur Générale</option>
-                            <option value="Directeur Pédagogique">Directeur Pédagogique</option>
-                            <option value="Autres">Autres</option>
-                        </select>
-                    </div>
-                
-                    <div class="w-1/2">
-                        <label for="">Sexe</label>
-                        <select name="sexe" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                            <option selected disabled>Veuillez choisir le sexe</option>
-                            <option value="Masculin">Masculin</option>
-                            <option value="Feminin">Feminin</option>
-                            <option value="Autres">Autres</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Email</label>
-                        <input type="email" name="email" placeholder="Email du prof" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                    </div>
-                    
-                    <div class="w-1/2">
-                        <label for="">Numèro de téléphone</label>
-                        <input type="text" name="phone" placeholder="Numéro de téléphone du prof" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="">Niveau d'étude</label>
-                    <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                        <option disabled selected>Dernier diplome</option>
-                        <option value="CP1">CP1</option>
-                        <option value="CP2">CP2</option>
-                        <option value="CE1">CE1</option>
-                        <option value="CE2">CE2</option>
-                        <option value="CM1">CM1</option>
-                        <option value="CM2">CM2</option>
-                        <option value="6e">6e</option>
-                        <option value="5e">5e</option>
-                        <option value="4e">4e</option>
-                        <option value="3e">3e</option>
-                        <option value="Seconde">Seconde</option>
-                        <option value="Première">Première</option>
-                        <option value="Terminale">Terminale</option>
-                        <option value="BTS">BTS</option>
-                        <option value="Licence">Licence</option>
-                    </select>
-                </div>
-               
-               
-                <div class="">
-                    <label for="">Date de debut</label>
-                    <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex justify-end space-x-2">
-                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
-                    Annuler
-                </button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    Confirmer
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Modal poour filtrer les profs -->
-    <div class="fixed inset-0 bg-black/30 bg-opacity-50 flex items-center justify-center z-50 hidden" id="filter">
-        <form action="" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
-            <!-- Header -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Rehercher un(e) employé(e)</h2>
-            </div>
-
-            <!-- Body -->
-            <div class="mb-6 space-y-4">
-                <div class="">
-                    <label for="">Matricule</label>
-                    <input type="text" name="Matricul" placeholder="Matricule de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full">
-                </div>
-               
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Nom</label>
-                        <input type="text" name="FirstName" placeholder="Nom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-                
-                    <div class="w-1/2">
-                        <label for="">Prenom</label>
-                        <input type="text" name="LastName" placeholder="Prenom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-                </div>
-
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Poste</label>
-                        <select name="Lesson" class="border hover:outline-none focus:outline-none p-1 w-full">
-                            <option selected disabled>Veuillez choisir le poste de l'employé</option>
-                            <option value="">Secrétaire</option>
-                            <option value="">Comptable </option>
-                            <option value="">Gardien</option>
-                            <option value="">RH</option>
-                            <option value="">Directeur Générale</option>
-                            <option value="">Directeur Pédagogique</option>
-                            <option value="">Autres</option>
-                        </select>
-                    </div>
-                
-                    <div class="w-1/2">
-                        <label for="">Sexe</label>
-                        <select name="Sexe" class="border hover:outline-none focus:outline-none p-1 w-full">
-                            <option selected disabled>Veuillez choisir le sexe</option>
-                            <option value="Masculin">Masculin</option>
-                            <option value="Feminin">Feminin</option>
-                            <option value="Autres">Autres</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Email</label>
-                        <input type="email" name="Email" placeholder="Email du prof" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-                    
-                    <div class="w-1/2">
-                        <label for="">Numèro de téléphone</label>
-                        <input type="text" name="Phone" placeholder="Numéro de téléphone du prof" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="">Niveau d'étude</label>
-                    <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full">
-                        <option disabled selected>Dernier diplome</option>
-                        <option value="">CP1</option>
-                        <option value="">CP2</option>
-                        <option value="">CE1</option>
-                        <option value="">CE2</option>
-                        <option value="">CM1</option>
-                        <option value="">CM2</option>
-                        <option value="">6e</option>
-                        <option value="">5e</option>
-                        <option value="">4e</option>
-                        <option value="">3e</option>
-                        <option value="">Seconde</option>
-                        <option value="">Première</option>
-                        <option value="">Terminale</option>
-                        <option value="">BTS</option>
-                        <option value="">Licence</option>
-                    </select>
-                </div>
-               
-                <div class="flex space-x-2">
-                    <div class="w-1/2">
-                        <label for="">Date de debut</label>
-                        <input type="date" name="Start" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-
-                    <div class="w-1/2">
-                        <label for="">Date de fin</label>
-                        <input type="date" name="End" class="border hover:outline-none focus:outline-none p-1 w-full">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="flex justify-end space-x-2">
-                <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
-                    Annuler
-                </button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                    Confirmer
-                </button>
-            </div>
-        </form>
-    </div>
-
-
-    <!-- Update modal -->
-    {{ range .staff}}
-    <div id="update-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <form action="/staff/update/{{.ID}}" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
-                <!-- Header -->
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-semibold">Ajouter un(e) employé(e)</h2>
-                </div>
-
-                <!-- Body -->
-                <div class="mb-6 space-y-4">
-                    <div class="">
-                        <label for="">Matricule</label>
-                        <input type="text" name="matricul" placeholder="Matricule de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Matricul }}" required>
-                    </div>
-                
-                    <div class="flex space-x-2">
-                        <div class="w-1/2">
-                            <label for="">Nom</label>
-                            <input type="text" name="firstName" placeholder="Nom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .FirstName }}" required>
-                        </div>
-                    
-                        <div class="w-1/2">
-                            <label for="">Prenom</label>
-                            <input type="text" name="lastName" placeholder="Prenom de l'employé(e)" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .LastName }}" required>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-2">
-                        <div class="w-1/2">
-                            <label for="">Poste</label>
-                            <select name="position" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                                <option disabled>Veuillez choisir le poste de l'employé</option>
-                                <option value="Secrétaire" {{ if eq .Position "Secrétaire"}} selected {{ end }}>Secrétaire</option>
-                                <option value="Comptable" {{ if eq .Position "Comptable"}} selected {{ end }}>Comptable </option>
-                                <option value="Gardien" {{ if eq .Position "Gardien"}} selected {{ end }}>Gardien</option>
-                                <option value="RH" {{ if eq .Position "RH"}} selected {{ end }}>RH</option>
-                                <option value="Directeur Générale" {{ if eq .Position "Directeur Générale"}} selected {{ end }}>Directeur Générale</option>
-                                <option value="Directeur Pédagogique" {{ if eq .Position "Directeur Pédagogique"}} selected {{ end }}>Directeur Pédagogique</option>
-                                <option value="Autres" {{ if eq .Position "Autres"}} selected {{ end }}>Autres</option>
-                            </select>
-                        </div>
-                    
-                        <div class="w-1/2">
-                            <label for="">Sexe</label>
-                            <select name="sexe" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                                <option disabled>Veuillez choisir le sexe</option>
-                                <option value="Masculin" {{ if eq .Sexe "Masculin"}} selected {{ end }}>Masculin</option>
-                                <option value="Feminin" {{ if eq .Sexe "Feminin"}} selected {{ end }}>Feminin</option>
-                                <option value="Autres" {{ if eq .Sexe "Autres"}} selected {{ end }}>Autres</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-2">
-                        <div class="w-1/2">
-                            <label for="">Email</label>
-                            <input type="email" name="email" placeholder="Email du staff" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Email }}" required>
-                        </div>
-                        
-                        <div class="w-1/2">
-                            <label for="">Numèro de téléphone</label>
-                            <input type="text" name="phone" placeholder="Numéro de téléphone du staff" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Phone }}" required>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="">Niveau d'étude</label>
-                        <select name="grade" class="border hover:outline-none focus:outline-none p-1 w-full" required>
-                            <option disabled>Dernier diplome</option>
-                            <option value="CP1" {{ if eq .Grade "CP1"}} selected {{ end }}>CP1</option>
-                            <option value="CP2" {{ if eq .Grade "CP2"}} selected {{ end }}>CP2</option>
-                            <option value="CE1" {{ if eq .Grade "CE1"}} selected {{ end }}>CE1</option>
-                            <option value="CE2" {{ if eq .Grade "CE2"}} selected {{ end }}>CE2</option>
-                            <option value="CM1" {{ if eq .Grade "CM1"}} selected {{ end }}>CM1</option>
-                            <option value="CM2" {{ if eq .Grade "CM2"}} selected {{ end }}>CM2</option>
-                            <option value="6e" {{ if eq .Grade "6e"}} selected {{ end }}>6e</option>
-                            <option value="5e" {{ if eq .Grade "5e"}} selected {{ end }}>5e</option>
-                            <option value="4e" {{ if eq .Grade "4e"}} selected {{ end }}>4e</option>
-                            <option value="3e" {{ if eq .Grade "3e"}} selected {{ end }}>3e</option>
-                            <option value="Seconde" {{ if eq .Grade "Seconde"}} selected {{ end }}>Seconde</option>
-                            <option value="Première" {{ if eq .Grade "Première"}} selected {{ end }}>Première</option>
-                            <option value="Terminale" {{ if eq .Grade "Terminale"}} selected {{ end }}>Terminale</option>
-                            <option value="BTS" {{ if eq .Grade "BTS"}} selected {{ end }}>BTS</option>
-                            <option value="Licence" {{ if eq .Grade "Licence"}} selected {{ end }}>Licence</option>
-                        </select>
-                    </div>
-                
-                
-                    <div class="">
-                        <label for="">Date de debut</label>
-                        <input type="date" name="start" class="border hover:outline-none focus:outline-none p-1 w-full" value="{{ .Start | formatDate }}" required>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="flex justify-end space-x-2">
-                    <button type="reset" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
-                        Annuler
-                    </button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                        Confirmer
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    {{ end}}
-
-    <!-- Delete modal -->
-    {{ range .staff }}
-    <div id="delete-modal-{{.ID}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="add-staff-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-2xl max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
-                <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-1">
-                    <h6 class="font-semibold text-xl text-red-950">Attention</h6>
-                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                        Vous êtes sur le point de supprimer un employé. Cette action est irréversible.
-                    </p>
+                <!-- Modal header -->
+                <div class="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Static modal
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="add-staff-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                 </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <form action="/staff/delete/{{.ID}}" method="post">
-                        <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">I accept</button>
-                    </form>
-                    <button data-modal-hide="delete-modal-{{.ID}}" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                <form action="/staff-list" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+                    <!-- Body -->
+                    <div class="mb-6 space-y-4">
+                        <div class="">
+                            <label for="">Matricule</label>
+                            <input type="text" name="matricul" placeholder="Matricule de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                        </div>
+                    
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Nom</label>
+                                <input type="text" name="firstName" placeholder="Nom de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                            </div>
+                        
+                            <div class="w-1/2">
+                                <label for="">Prenom</label>
+                                <input type="text" name="lastName" placeholder="Prenom de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Poste</label>
+                                <select name="position" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                    <option disabled>Veuillez choisir le poste de l'employé</option>
+                                    <option value="Secrétaire">Secrétaire</option>
+                                    <option value="Comptable">Comptable </option>
+                                    <option value="Gardien">Gardien</option>
+                                    <option value="RH">RH</option>
+                                    <option value="Directeur Générale">Directeur Générale</option>
+                                    <option value="Directeur Pédagogique">Directeur Pédagogique</option>
+                                    <option value="Autres">Autres</option>
+                                </select>
+                            </div>
+                        
+                            <div class="w-1/2">
+                                <label for="">Sexe</label>
+                                <select name="sexe" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                    <option disabled>Veuillez choisir le sexe</option>
+                                    <option value="Masculin">Masculin</option>
+                                    <option value="Feminin">Feminin</option>
+                                    <option value="Autres">Autres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Email</label>
+                                <input type="email" name="email" placeholder="Email du prof" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                            </div>
+                            
+                            <div class="w-1/2">
+                                <label for="">Numèro de téléphone</label>
+                                <input type="text" name="phone" placeholder="Numéro de téléphone du prof" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="">Niveau d'étude</label>
+                            <select name="grade" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                <option disabled>Dernier diplome</option>
+                                <option value="CP1">CP1</option>
+                                <option value="CP2">CP2</option>
+                                <option value="CE1">CE1</option>
+                                <option value="CE2">CE2</option>
+                                <option value="CM1">CM1</option>
+                                <option value="CM2">CM2</option>
+                                <option value="6e">6e</option>
+                                <option value="5e">5e</option>
+                                <option value="4e">4e</option>
+                                <option value="3e">3e</option>
+                                <option value="Seconde">Seconde</option>
+                                <option value="Première">Première</option>
+                                <option value="Terminale">Terminale</option>
+                                <option value="BTS">BTS</option>
+                                <option value="Licence">Licence</option>
+                            </select>
+                        </div>
+                    
+                    
+                        <div class="">
+                            <label for="">Date de debut</label>
+                            <input type="date" name="start" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="add-staff-modal" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="add-staff-modal" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{ range .staff}}
+    <div id="update-staff-modal-{{.ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-6 rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Static modal
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="update-staff-modal-{{.ID}}">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
                 </div>
+                <form action="/staff/update/{{.ID}}" method="post" class="bg-white rounded-sm shadow-lg max-w-2xl w-full p-6">
+                    <!-- Body -->
+                    <div class="mb-6 space-y-4">
+                        <div class="">
+                            <label for="">Matricule</label>
+                            <input type="text" name="matricul" placeholder="Matricule de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .Matricul }}" required>
+                        </div>
+                    
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Nom</label>
+                                <input type="text" name="firstName" placeholder="Nom de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .FirstName }}" required>
+                            </div>
+                        
+                            <div class="w-1/2">
+                                <label for="">Prenom</label>
+                                <input type="text" name="lastName" placeholder="Prenom de l'employé(e)" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .LastName }}" required>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Poste</label>
+                                <select name="position" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                    <option disabled>Veuillez choisir le poste de l'employé</option>
+                                    <option value="Secrétaire" {{ if eq .Position "Secrétaire"}} selected {{ end }}>Secrétaire</option>
+                                    <option value="Comptable" {{ if eq .Position "Comptable"}} selected {{ end }}>Comptable </option>
+                                    <option value="Gardien" {{ if eq .Position "Gardien"}} selected {{ end }}>Gardien</option>
+                                    <option value="RH" {{ if eq .Position "RH"}} selected {{ end }}>RH</option>
+                                    <option value="Directeur Générale" {{ if eq .Position "Directeur Générale"}} selected {{ end }}>Directeur Générale</option>
+                                    <option value="Directeur Pédagogique" {{ if eq .Position "Directeur Pédagogique"}} selected {{ end }}>Directeur Pédagogique</option>
+                                    <option value="Autres" {{ if eq .Position "Autres"}} selected {{ end }}>Autres</option>
+                                </select>
+                            </div>
+                        
+                            <div class="w-1/2">
+                                <label for="">Sexe</label>
+                                <select name="sexe" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                    <option disabled>Veuillez choisir le sexe</option>
+                                    <option value="Masculin" {{ if eq .Sexe "Masculin"}} selected {{ end }}>Masculin</option>
+                                    <option value="Feminin" {{ if eq .Sexe "Feminin"}} selected {{ end }}>Feminin</option>
+                                    <option value="Autres" {{ if eq .Sexe "Autres"}} selected {{ end }}>Autres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4">
+                            <div class="w-1/2">
+                                <label for="">Email</label>
+                                <input type="email" name="email" placeholder="Email du staff" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .Email }}" required>
+                            </div>
+                            
+                            <div class="w-1/2">
+                                <label for="">Numèro de téléphone</label>
+                                <input type="text" name="phone" placeholder="Numéro de téléphone du staff" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .Phone }}" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="">Niveau d'étude</label>
+                            <select name="grade" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" required>
+                                <option disabled>Dernier diplome</option>
+                                <option value="CP1" {{ if eq .Grade "CP1"}} selected {{ end }}>CP1</option>
+                                <option value="CP2" {{ if eq .Grade "CP2"}} selected {{ end }}>CP2</option>
+                                <option value="CE1" {{ if eq .Grade "CE1"}} selected {{ end }}>CE1</option>
+                                <option value="CE2" {{ if eq .Grade "CE2"}} selected {{ end }}>CE2</option>
+                                <option value="CM1" {{ if eq .Grade "CM1"}} selected {{ end }}>CM1</option>
+                                <option value="CM2" {{ if eq .Grade "CM2"}} selected {{ end }}>CM2</option>
+                                <option value="6e" {{ if eq .Grade "6e"}} selected {{ end }}>6e</option>
+                                <option value="5e" {{ if eq .Grade "5e"}} selected {{ end }}>5e</option>
+                                <option value="4e" {{ if eq .Grade "4e"}} selected {{ end }}>4e</option>
+                                <option value="3e" {{ if eq .Grade "3e"}} selected {{ end }}>3e</option>
+                                <option value="Seconde" {{ if eq .Grade "Seconde"}} selected {{ end }}>Seconde</option>
+                                <option value="Première" {{ if eq .Grade "Première"}} selected {{ end }}>Première</option>
+                                <option value="Terminale" {{ if eq .Grade "Terminale"}} selected {{ end }}>Terminale</option>
+                                <option value="BTS" {{ if eq .Grade "BTS"}} selected {{ end }}>BTS</option>
+                                <option value="Licence" {{ if eq .Grade "Licence"}} selected {{ end }}>Licence</option>
+                            </select>
+                        </div>
+                    
+                    
+                        <div class="">
+                            <label for="">Date de debut</label>
+                            <input type="date" name="start" class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .Start.Format "2006-01-02" }}" required>
+                        </div>
+
+                        <div class="">
+                            <label for="">Date de résilition</label>
+                            <input type="date" name="end" {{ if .End }} value="{{ .End.Format "2006-01-02"}}" {{ else }} value="" {{ end }}  class="border border-gray-300  hover:outline-none focus:outline-none py-2 px-4 rounded-md w-full mt-1" value="{{ .Start.Format "2006-01-02" }}" required>
+                        </div>
+                    </div>
+                   
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="update-staff-modal-{{.ID}}" type="reset" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-cyan-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Recommencer</button>
+                        <button data-modal-hide="update-staff-modal-{{.ID}}" type="submit" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800">Modifier</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     {{ end }}
+
+    {{ range .staff}}
+    <div id="delete-staff-modal-{{.ID}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                <form action="/staff/delete/{{.ID}}" method="post" class="">
+                    <div class="px-4 md:px-5 my-6 pt-6">
+                        <div class="bg-red-50 w-fit px-4 pb-1.5 pt-3 rounded-md text-red-700 mb-3"><iconify-icon icon="ci:octagon-warning" class="text-3xl"></iconify-icon></div>
+                        <h2 class="text-gray-800 text-xl font-medium mb-2">Confirmer la suppression</h2>
+                        <p class="text-gray-800 text-lg">L'employé(e) <span class="font-semibold">{{ .FirstName}} {{ .LastName}}</span> va être supprimé de manière définitive.</p>  
+                    </div>
+
+                    <div class="flex justify-end items-center px-4 md:px-6 pb-4 md:pb-6 rounded-b dark:border-gray-600">
+                        <button data-modal-hide="delete-staff-modal-{{.ID}}" type="button" class="py-2.5 px-5 me-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Annuler</button>
+                        <button data-modal-hide="delete-staff-modal-{{.ID}}" type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Supprimer</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     {{ end }}
 </body>
 </html>
-
-
-<script lang="ts">
-    function openModal(modalId) {
-        const modal = document.getElementById(modalId);
-        const form = modal.querySelector('form');
-
-        // Animation d'apparition
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.classList.add('opacity-100');
-            form.classList.add('scale-100');
-        }, 10);
-
-        function closeModal() {
-            // Animation de fermeture
-            modal.classList.remove('opacity-100');
-            form.classList.remove('scale-100');
-
-            // Attendre la fin de l'animation avant de masquer
-            setTimeout(() => {
-            modal.classList.add('hidden');
-            }, 300);
-
-            modal.removeEventListener('click', handleOutsideClick);
-            document.removeEventListener('keydown', handleEsc);
-        }
-
-        function handleOutsideClick(e) {
-            if (e.target === modal) closeModal();
-        }
-
-        function handleEsc(e) {
-            if (e.key === 'Escape') closeModal();
-        }
-
-        // Attacher les événements
-        modal.addEventListener('click', handleOutsideClick);
-        document.addEventListener('keydown', handleEsc);
-
-        // Bouton "Annuler"
-        const cancelBtn = modal.querySelector('button[type="reset"]');
-        if (cancelBtn) {
-            cancelBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeModal();
-            });
-        }
-
-        // Focus auto
-        const firstInput = modal.querySelector('input, select, textarea');
-        if (firstInput) firstInput.focus();
-    }
-
-
-    function AddModal() {
-        openModal('add');
-    }
-
-    function FilterModal() {
-        openModal('filter');
-    }
-
-</script>

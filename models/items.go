@@ -7,15 +7,15 @@ import (
 )
 
 type Item struct {
-	ID          uint64       `gorm:"primaryKey"`
-	Title       string     `gorm:"size:100;not null"` 
-	Description string     `gorm:"type:text"`        
-	Type        string     `gorm:"size:50;not null"`
-	Value       string     `gorm:"size:50"`
-	Quantity    int        
-	Status      string     `gorm:"size:50"`
-	Start       time.Time  `gorm:"not null"`
-	Repair      *time.Time
+	ID          uint64 `gorm:"primaryKey"`
+	Title       string `gorm:"size:100;not null"`
+	Description string `gorm:"type:text"`
+	Type        string `gorm:"size:50;not null"`
+	Value       int    `gorm:"not null"`
+	Quantity    int
+	Status      string    `gorm:"size:50"`
+	Start       time.Time `gorm:"not null"`
+	Repair      time.Time `gorm:"null"`
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	DeletedAt   gorm.DeletedAt `gorm:"index"`
@@ -39,14 +39,14 @@ func GetItemByID(db *gorm.DB, id uint64) (*Item, error) {
 // ListItems retourne tous les items
 func ListItems(db *gorm.DB) ([]Item, error) {
 	var items []Item
-	err := db.Order("title ASC").Find(&items).Error
+	err := db.Find(&items).Error
 	return items, err
 }
 
 // ListItems retourne tous les items avec un limit de 6
 func ListItemsLimit6(db *gorm.DB) ([]Item, error) {
 	var items []Item
-	err := db.Order("title ASC").Limit(6).Find(&items).Error
+	err := db.Limit(6).Find(&items).Error
 	return items, err
 }
 

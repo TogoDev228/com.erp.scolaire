@@ -352,8 +352,15 @@ func UpdateStaff(c *gin.Context, db *gorm.DB) {
 	position := c.PostForm("position")
 	phone := c.PostForm("phone")
 	startStr := c.PostForm("start")
+	endStr := c.PostForm("end")
 
 	start, err := time.Parse("2006-01-02", startStr)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Date invalide : %v", err)
+		return
+	}
+
+	end, err := time.Parse("2006-01-02", endStr)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Date invalide : %v", err)
 		return
@@ -362,6 +369,11 @@ func UpdateStaff(c *gin.Context, db *gorm.DB) {
 	staff := &models.Staff{}
 	if err := db.First(staff, id).Error; err != nil {
 		c.String(http.StatusNotFound, "Employé(e) non trouvé(e) : %v", err)
+		return
+	}
+
+	if (start.After(end)){
+		c.String(http.StatusBadRequest, "La date de début ne peut pas être postérieure à la date de résilition")
 		return
 	}
 
@@ -374,6 +386,7 @@ func UpdateStaff(c *gin.Context, db *gorm.DB) {
 	staff.Email = email
 	staff.Phone = phone
 	staff.Start = start
+	staff.End = end
 
 	if err := db.Save(staff).Error; err != nil {
 		c.String(http.StatusInternalServerError, "Erreur lors de la mise à jour : %v", err)
@@ -406,13 +419,27 @@ func UpdateItem(c *gin.Context, db *gorm.DB) {
 	title := c.PostForm("title")
 	description := c.PostForm("description")
 	typ := c.PostForm("type")
-	value := c.PostForm("value")
+	valueStr := c.PostForm("value")
 	quantityStr := c.PostForm("quantity")
 	statut := c.PostForm("statut")
 	startStr := c.PostForm("start")
+	repairStr := c.PostForm("repair")
+
+	value, err := strconv.Atoi(valueStr)
+
+	if err != nil {
+		c.String(http.StatusBadRequest, "Value invalide : %v", err)
+		return
+	}
 
 	// Conversion de start en time.Time
 	start, err := time.Parse("2006-01-02", startStr)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Date invalide : %v", err)
+		return
+	}
+
+	repair, err := time.Parse("2006-01-02", repairStr)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Date invalide : %v", err)
 		return
@@ -424,10 +451,15 @@ func UpdateItem(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
+	if (start.After(repair)){
+		c.String(http.StatusBadRequest, "La date de mise en service ne peut pas être postérieure à la date de dernière réparation")
+		return
+	}
+
 	// Récupérer l'item existant depuis la BDD
 	item, err := models.GetItemByID(db, uint64(id))
 	if err != nil {
-		c.String(http.StatusNotFound, "Equipement non trouvé : %v", err)
+		c.String(http.StatusNotFound, "Ressource non trouvé : %v", err)
 		return
 	}
 
@@ -439,12 +471,13 @@ func UpdateItem(c *gin.Context, db *gorm.DB) {
 	item.Quantity = quantity
 	item.Status = statut
 	item.Start = start
+	item.Repair = repair
 
 	// Enregistrer la mise à jour en BDD
 	if err := models.UpdateItem(db, item); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur lors de la mise à jour : %v", err)
 
-		log := &models.Log{Type: "ERROR", Message: "Equipement " + title + " n'a pas pu être mis à jour"}
+		log := &models.Log{Type: "ERROR", Message: "Ressource " + title + " n'a pas pu être mis à jour"}
 		if err := models.CreateLog(db, log); err != nil {
 			c.String(http.StatusInternalServerError, "Erreur lors de la création du log : %v", err)
 			return
@@ -452,7 +485,7 @@ func UpdateItem(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
-	log := &models.Log{Type: "UPDATE", Message: "Equipement " + title + " mis à jour avec succès"}
+	log := &models.Log{Type: "UPDATE", Message: "Ressource " + title + " mis à jour avec succès"}
 	if err := models.CreateLog(db, log); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur lors de la création du log : %v", err)
 		return

@@ -278,10 +278,17 @@ func AddItem(c *gin.Context, db *gorm.DB) {
 	title := c.PostForm("title")
 	description := c.PostForm("description")
 	typ := c.PostForm("type")
-	value := c.PostForm("value")
+	valueStr := c.PostForm("value")
 	quantityStr := c.PostForm("quantity")
 	statut := c.PostForm("statut")
 	startStr := c.PostForm("start")
+
+	value, err := strconv.Atoi(valueStr)
+
+	if err != nil {
+		c.String(http.StatusBadRequest, "Value invalide : %v", err)
+		return
+	}
 
 	// Conversion de start en time.Time
 	start, err := time.Parse("2006-01-02", startStr) // format exemple : "2025-06-05"

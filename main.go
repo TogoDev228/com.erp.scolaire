@@ -11,6 +11,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+
+	"golang.org/x/text/language"
+    "golang.org/x/text/message"
 )
 
 func main() {
@@ -52,6 +55,11 @@ func main() {
 
 			return "Aucune"
 		},
+
+		"formatMoney": func(v int) string {
+            p := message.NewPrinter(language.French)
+            return p.Sprintf("%d", v) // 5000 → "5 000"
+        },
 	})
 
 	r.Static("/js", "./views/js")

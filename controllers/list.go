@@ -80,7 +80,7 @@ func ShowActivityList(c *gin.Context, db *gorm.DB) {
 func ShowItemList(c *gin.Context, db *gorm.DB) {
 	item, err := models.ListItems(db)
 	if err != nil {
-		c.String(http.StatusInternalServerError, "message, impossible de charger la liste des équipements.")
+		c.String(http.StatusInternalServerError, "message, impossible de charger la liste des ressources.")
 		return
 	}
 

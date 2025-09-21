@@ -7,17 +7,17 @@ import (
 )
 
 type Staff struct {
-	ID        uint64      `gorm:"primaryKey"`
-	Matricul  string    `gorm:"size:50;unique;not null"`
+	ID        uint64    `gorm:"primaryKey"`
+	Matricul  string    `gorm:"unique;not null"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
 	Position  string    `gorm:"size:100;not null"` // Ex: "Secrétaire", "Comptable", etc.
-	Sexe      string    `gorm:"size:10"`           // "M", "F", ou autres
-	Email     string    `gorm:"size:100;unique"`
+	Sexe      string    `gorm:"size:25"`           // "M", "F", ou autres
+	Email     string    `gorm:"size:120;unique"`
 	Grade     string    `gorm:"size:50"` // Si pertinent
 	Phone     string    `gorm:"size:20"`
 	Start     time.Time `gorm:"not null"`
-	End       *time.Time
+	End       time.Time `gorm:"null"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"` // Pour soft delete
