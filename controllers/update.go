@@ -294,8 +294,15 @@ func UpdateProf(c *gin.Context, db *gorm.DB) {
 	email := c.PostForm("email")
 	phone := c.PostForm("phone")
 	startStr := c.PostForm("start")
+	endStr := c.PostForm("end")
 
 	start, err := time.Parse("2006-01-02", startStr)
+	if err != nil {
+		c.String(http.StatusBadRequest, "Date invalide : %v", err)
+		return
+	}
+
+	end, err := time.Parse("2006-01-02", endStr)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Date invalide : %v", err)
 		return
@@ -307,6 +314,11 @@ func UpdateProf(c *gin.Context, db *gorm.DB) {
 		return
 	}
 
+	if( start.After(end) && !end.IsZero()){
+		c.String(http.StatusBadRequest, "La date de début ne peut pas être postérieure à la date de résilition")
+		return
+	}
+
 	prof.Matricul = matricul
 	prof.FirstName = firstName
 	prof.LastName = lastName
@@ -315,18 +327,19 @@ func UpdateProf(c *gin.Context, db *gorm.DB) {
 	prof.Email = email
 	prof.Phone = phone
 	prof.Start = start
+	prof.End = end
 
 	if err := db.Save(prof).Error; err != nil {
 		c.String(http.StatusInternalServerError, "Erreur lors de la mise à jour : %v", err)
 
-		log := &models.Log{Type: "ERROR", Message: "Prof " + firstName + lastName + " n'a pas pu être mis à jour"}
+		log := &models.Log{Type: "ERROR", Message: "Professeur " + firstName + lastName + " n'a pas pu être mis à jour"}
 		if err := models.CreateLog(db, log); err != nil {
 			c.String(http.StatusInternalServerError, "Erreur : %v", err)
 		}
 		return
 	}
 
-	log := &models.Log{Type: "UPDATE", Message: "Prof " + firstName + lastName + " mis à jour avec succès"}
+	log := &models.Log{Type: "UPDATE", Message: "Professeur " + firstName + lastName + " mis à jour avec succès"}
 	if err := models.CreateLog(db, log); err != nil {
 		c.String(http.StatusInternalServerError, "Erreur : %v", err)
 		return

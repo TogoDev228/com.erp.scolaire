@@ -7,16 +7,16 @@ import (
 )
 
 type Prof struct {
-	ID        uint64      `gorm:"primaryKey"`
+	ID        uint64    `gorm:"primaryKey"`
 	Matricul  string    `gorm:"size:50;unique;not null"`
 	FirstName string    `gorm:"size:100;not null"`
 	LastName  string    `gorm:"size:100;not null"`
 	Sexe      string    `gorm:"size:10"`
 	Email     string    `gorm:"size:100;unique"`
-	Grade     string    `gorm:"size:50"` // ex: "Agrégé", "Contractuel"
+	Grade     string    `gorm:"size:50"`
 	Phone     string    `gorm:"size:20"`
 	Start     time.Time `gorm:"not null"` // Date d’entrée
-	End       *time.Time
+	End       time.Time `gorm:"null"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"` // Soft delete

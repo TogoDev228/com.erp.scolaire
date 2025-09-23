@@ -64,7 +64,7 @@ func GetStudentByMatricul(db *gorm.DB, matricul string) (*Student, error) {
 // ListStudents retourne tous les étudiants (optionnel : avec pagination ou filtre par année)
 func ListStudents(db *gorm.DB) ([]Student, error) {
 	var students []Student
-	err := db.Order("last_name ASC").Find(&students).Error
+	err := db.Find(&students).Error
 	return students, err
 }
 
